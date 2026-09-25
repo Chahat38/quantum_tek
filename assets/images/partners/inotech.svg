@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 60" width="210" height="60">
+  <defs>
+    <linearGradient id="inotechGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F2FE"/>
+      <stop offset="100%" stop-color="#4FACFE"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(10, 10)">
+    <!-- Tech Cube -->
+    <path d="M16 4 L28 10 L28 24 L16 30 L4 24 L4 10 Z" fill="url(#inotechGrad)" opacity="0.9"/>
+    <path d="M16 4 L16 30" stroke="#0B0F15" stroke-width="1.5"/>
+    <path d="M4 10 L28 24" stroke="#0B0F15" stroke-width="1.5"/>
+    <path d="M28 10 L4 24" stroke="#0B0F15" stroke-width="1.5"/>
+    <!-- Wordmark -->
+    <text x="38" y="22" font-family="'Segoe UI', Roboto, sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">INOTECH</text>
+    <text x="38" y="32" font-family="'Segoe UI', Roboto, sans-serif" font-size="8.5" font-weight="600" fill="#00F2FE" letter-spacing="1">SOLUTIONS</text>
+  </g>
+</svg>

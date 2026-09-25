@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" width="280" height="280">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE066"/>
+      <stop offset="30%" stop-color="#F5B700"/>
+      <stop offset="70%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#AA771C"/>
+    </linearGradient>
+    <linearGradient id="innerGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#142238"/>
+      <stop offset="100%" stop-color="#112A4F"/>
+    </linearGradient>
+    <linearGradient id="accentRing" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3082D2"/>
+      <stop offset="50%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#3082D2"/>
+    </linearGradient>
+    <filter id="shadowFilter" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadowFilter)">
+    <!-- Outer Starburst/Ribbon Teeth -->
+    <circle cx="140" cy="140" r="130" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-dasharray="4 6"/>
+    <circle cx="140" cy="140" r="122" fill="url(#innerGlow)" stroke="url(#accentRing)" stroke-width="3"/>
+    <circle cx="140" cy="140" r="106" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+
+    <!-- Concentric Decorative Ring -->
+    <circle cx="140" cy="140" r="100" fill="rgba(48, 130, 210, 0.08)" stroke="url(#goldGrad)" stroke-width="2"/>
+
+    <!-- Top Stars -->
+    <g fill="url(#goldGrad)" transform="translate(140, 52)">
+      <polygon points="0,-6 2,-2 6,-2 3,1 4,5 0,3 -4,5 -3,1 -6,-2 -2,-2" transform="translate(0, 0) scale(1.1)"/>
+      <polygon points="0,-6 2,-2 6,-2 3,1 4,5 0,3 -4,5 -3,1 -6,-2 -2,-2" transform="translate(-16, 3) scale(0.85)"/>
+      <polygon points="0,-6 2,-2 6,-2 3,1 4,5 0,3 -4,5 -3,1 -6,-2 -2,-2" transform="translate(16, 3) scale(0.85)"/>
+    </g>
+
+    <!-- Center ISO 9001 Heading -->
+    <text x="140" y="85" font-family="'Segoe UI', Poppins, sans-serif" font-size="11" font-weight="700" fill="#3082D2" letter-spacing="3" text-anchor="middle">CERTIFIED</text>
+    <text x="140" y="125" font-family="'Segoe UI', Poppins, sans-serif" font-size="34" font-weight="900" fill="url(#goldGrad)" letter-spacing="2" text-anchor="middle">ISO</text>
+    <text x="140" y="160" font-family="'Segoe UI', Poppins, sans-serif" font-size="24" font-weight="800" fill="#FFFFFF" letter-spacing="1.5" text-anchor="middle">9001:2015</text>
+    
+    <!-- Divider -->
+    <line x1="75" y1="172" x2="205" y2="172" stroke="url(#accentRing)" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Subtitle: Quality Management System -->
+    <text x="140" y="192" font-family="'Segoe UI', Poppins, sans-serif" font-size="9" font-weight="700" fill="#3082D2" letter-spacing="2" text-anchor="middle">QUALITY MANAGEMENT</text>
+    <text x="140" y="206" font-family="'Segoe UI', Poppins, sans-serif" font-size="8.5" font-weight="600" fill="#94A3B8" letter-spacing="1.5" text-anchor="middle">SYSTEM STANDARDS</text>
+
+    <!-- Checkmark Shield Badge at Bottom -->
+    <g transform="translate(140, 226)">
+      <circle cx="0" cy="0" r="12" fill="url(#accentRing)"/>
+      <path d="M-4 -1 L-1 3 L5 -3" stroke="#0B0F15" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+  </g>
+</svg>

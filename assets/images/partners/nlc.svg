@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 60" width="210" height="60">
+  <defs>
+    <linearGradient id="nlcGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1C40F"/>
+      <stop offset="100%" stop-color="#E67E22"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(10, 10)">
+    <!-- Chevron / Emblem -->
+    <path d="M4 8 L16 16 L28 8 L28 16 L16 24 L4 16 Z" fill="url(#nlcGold)"/>
+    <path d="M4 18 L16 26 L28 18 L28 26 L16 34 L4 26 Z" fill="#2ECC71"/>
+    <!-- Wordmark -->
+    <text x="38" y="24" font-family="'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="900" fill="#FFFFFF" letter-spacing="2">NLC</text>
+  </g>
+</svg>

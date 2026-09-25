@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" width="220" height="60">
+  <g transform="translate(10, 8)">
+    <!-- Huawei Floral Petals Icon (Vibrant Red) -->
+    <g transform="translate(22, 22) scale(0.65)">
+      <path d="M0 -30 C-3 -15, -3 -5, 0 0 C3 -5, 3 -15, 0 -30 Z" fill="#E60012" opacity="0.95"/>
+      <path d="M0 -30 C-3 -15, -3 -5, 0 0 C3 -5, 3 -15, 0 -30 Z" fill="#E60012" transform="rotate(45)" opacity="0.95"/>
+      <path d="M0 -30 C-3 -15, -3 -5, 0 0 C3 -5, 3 -15, 0 -30 Z" fill="#E60012" transform="rotate(90)" opacity="0.95"/>
+      <path d="M0 -30 C-3 -15, -3 -5, 0 0 C3 -5, 3 -15, 0 -30 Z" fill="#E60012" transform="rotate(135)" opacity="0.95"/>
+      <path d="M0 -30 C-3 -15, -3 -5, 0 0 C3 -5, 3 -15, 0 -30 Z" fill="#E60012" transform="rotate(-45)" opacity="0.95"/>
+      <path d="M0 -30 C-3 -15, -3 -5, 0 0 C3 -5, 3 -15, 0 -30 Z" fill="#E60012" transform="rotate(-90)" opacity="0.95"/>
+      <path d="M0 -30 C-3 -15, -3 -5, 0 0 C3 -5, 3 -15, 0 -30 Z" fill="#E60012" transform="rotate(-135)" opacity="0.95"/>
+      <path d="M0 -30 C-3 -15, -3 -5, 0 0 C3 -5, 3 -15, 0 -30 Z" fill="#E60012" transform="rotate(180)" opacity="0.95"/>
+    </g>
+    <!-- Text -->
+    <text x="60" y="29" font-family="'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" letter-spacing="2">HUAWEI</text>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 60" width="210" height="60">
+  <g transform="translate(10, 10)">
+    <!-- Hytera Blue Wings Emblem -->
+    <defs>
+      <linearGradient id="hyteraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#00A0E9"/>
+        <stop offset="100%" stop-color="#005bac"/>
+      </linearGradient>
+    </defs>
+    <path d="M5 28 L15 12 L25 28 L19 28 L15 20 L11 28 Z" fill="url(#hyteraGrad)"/>
+    <path d="M22 28 L32 12 L42 28 L36 28 L32 20 L28 28 Z" fill="#00A0E9"/>
+    <!-- Wordmark -->
+    <text x="50" y="27" font-family="'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" letter-spacing="1">Hytera</text>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 60" width="210" height="60">
+  <defs>
+    <linearGradient id="hynerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3082D2"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(10, 10)">
+    <!-- Energy Bolt / Hexagon -->
+    <polygon points="16,4 28,11 28,25 16,32 4,25 4,11" fill="none" stroke="url(#hynerGrad)" stroke-width="2.5"/>
+    <polygon points="17,10 13,19 18,19 15,26 21,17 16,17" fill="url(#hynerGrad)"/>
+    <!-- Wordmark -->
+    <text x="38" y="25" font-family="'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="900" fill="#FFFFFF" letter-spacing="2">HYNER</text>
+  </g>
+</svg>
