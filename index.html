@@ -142,12 +142,10 @@
   <canvas id="heroCanvas" class="hero-interactive-canvas" aria-hidden="true" width="1440" height="1000"></canvas>
 
   <!-- Diagonal accent rules — the section's structural signature -->
-  <div class="nm-hero-diag-lines" aria-hidden="true">
-    <span class="nm-hero-diag-line nm-hero-diag-line--1"></span>
-    <span class="nm-hero-diag-line nm-hero-diag-line--2"></span>
-    <span class="nm-hero-diag-line nm-hero-diag-line--3"></span>
-    <span class="nm-hero-diag-line nm-hero-diag-line--4"></span>
-  </div>
+<div class="nm-hero-diag-lines" aria-hidden="true">
+<span class="nm-hero-diag-line nm-hero-diag-line--1"></span>
+<span class="nm-hero-diag-line nm-hero-diag-line--2"></span>
+</div>
 
   <div class="container position-relative nm-hero-stage" style="z-index:5;">
     <div class="row g-0 nm-hero-grid">
@@ -202,17 +200,16 @@
       <!-- ============ MEDIA PANEL (angled right column) ============ -->
       <div class="col-12 col-lg-6 nm-hero-col nm-hero-col--media" data-aos-delay="100">
         <div class="nm-hero-panel nm-hero-panel--media">
-          <span class="nm-hero-panel-edge" aria-hidden="true"></span>
-
           <div class="nm-hero-media-frame">
-            <!-- Two copies of the artwork in one 200%-wide track.
-                 The track slides right-to-left forever, so the seam is
-                 never visible and the motion is purely horizontal. -->
+            <!-- Two copies of the artwork in one 400%-wide track. Each copy is
+                 two frame-widths, so the join sits far off to the right and the
+                 visible window never straddles it. Sliding the track to -50%
+                 lands copy 2 exactly where copy 1 started, and the motion is
+                 purely horizontal. -->
             <div class="nm-hero-media-track" aria-hidden="true">
               <img class="nm-hero-media-img" src="/assets/images/h1-bg-img-1.webp" alt="">
               <img class="nm-hero-media-img" src="/assets/images/h1-bg-img-1.webp" alt="">
             </div>
-            <div class="nm-hero-media-scan" aria-hidden="true"></div>
           </div>
 
           <div class="nm-hero-media-chip">
@@ -1334,7 +1331,7 @@
     </div>
 
     <div class="swiper testimonials-swiper swiper-initialized swiper-horizontal swiper-backface-hidden" aria-label="Client testimonials carousel">
-      <div class="swiper-wrapper" id="swiper-wrapper-76552fa1810452568" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-440px, 0px, 0px); transition-delay: 0ms;">
+      <div class="swiper-wrapper" id="swiper-wrapper-8ecaffb10d7ee9fa7" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-440px, 0px, 0px); transition-delay: 0ms;">
                 <div class="swiper-slide swiper-slide-prev" role="group" aria-label="1 / 5" data-swiper-slide-index="0" style="width: 416px; margin-right: 24px;">
           <div class="testimonial-card">
             <div class="testimonial-stars" aria-label="5 out of 5 stars">
@@ -1701,7 +1698,7 @@ Saturday: 10:00 AM - 2:00 PM</p>
           <h3 style="margin-bottom:24px;">Send Us a Message</h3>
           <div id="formFeedback" class="alert" style="display:none;" role="alert"></div>
           <form id="contactForm" action="#" data-static-form="1" method="POST" novalidate="">
-            <input type="hidden" name="csrf_token" value="8ec6567d52fdf1e5d349c8db3b8ca38d683a95a4e22c49c1a2a2d645721593a9">            <div class="row g-3">
+            <input type="hidden" name="csrf_token" value="2be6dff761411b2b9e8ed0b0835fd582563ccbd19411f78d8397eca82958a42e">            <div class="row g-3">
               <div class="col-md-6">
                 <div class="qt-form-group">
                   <label class="qt-label" for="contactName">Full Name *</label>
@@ -1836,7 +1833,7 @@ Saturday: 10:00 AM - 2:00 PM</p>
         <div style="margin-top:20px;">
           <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:8px;">Subscribe to our newsletter</p>
           <form class="newsletter-form" id="newsletterForm" action="#" data-static-form="1" method="POST">
-            <input type="hidden" name="csrf_token" value="8ec6567d52fdf1e5d349c8db3b8ca38d683a95a4e22c49c1a2a2d645721593a9">            <input type="email" class="newsletter-input" name="email" placeholder="Your email" required="" aria-label="Email for newsletter">
+            <input type="hidden" name="csrf_token" value="2be6dff761411b2b9e8ed0b0835fd582563ccbd19411f78d8397eca82958a42e">            <input type="email" class="newsletter-input" name="email" placeholder="Your email" required="" aria-label="Email for newsletter">
             <button type="submit" class="newsletter-btn" aria-label="Subscribe"><i class="bi bi-send"></i></button>
           </form>
         </div>

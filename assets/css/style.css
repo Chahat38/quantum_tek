@@ -4358,10 +4358,10 @@ img { max-width: 100%; height: auto; }
     transparent 100%);
   transform: rotate(-11deg);
 }
+/* Only the two rules on the copy side. The variants that used to sit at
+   61% and 88% crossed the artwork and read as vertical streaks on it. */
 .nm-hero-diag-line--1 { left: 4%;  opacity: 0.30; }
 .nm-hero-diag-line--2 { left: 26%; opacity: 0.55; width: 2px; }
-.nm-hero-diag-line--3 { left: 61%; opacity: 0.40; }
-.nm-hero-diag-line--4 { left: 88%; opacity: 0.22; }
 
 /* ---- columns ----------------------------------------------- */
 @media (min-width: 992px) {
@@ -4412,30 +4412,13 @@ img { max-width: 100%; height: auto; }
   top: -9%;
 }
 
+/* The artwork carries the whole right column, edge to edge. No fill and no
+   padding here: a tinted background plus padding is what read as a dark
+   rectangular mat around the photo. Only the slanted silhouette remains. */
 .nm-hero-panel--media {
-  padding: clamp(14px, 1.5vw, 20px);
-  background: linear-gradient(200deg,
-    rgba(16, 34, 64, 0.72) 0%,
-    rgba(8, 16, 32, 0.50) 100%);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
+  padding: 0;
+  background: none;
   clip-path: polygon(var(--nm-dx) 0, 100% 0, 100% 100%, 0 100%);
-}
-.nm-hero-panel--media .nm-hero-panel-edge {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 118%;
-  top: -9%;
-  background: linear-gradient(180deg,
-    rgba(96, 165, 250, 0) 0%,
-    rgba(96, 165, 250, 0.80) 30%,
-    rgba(147, 197, 253, 0.92) 66%,
-    rgba(96, 165, 250, 0) 100%);
-  box-shadow: 0 0 18px rgba(59, 130, 246, 0.5);
-  rotate: 6.1deg;
-  transform-origin: top left;
 }
 
 /* ---- editorial index marker --------------------------------- */
@@ -4465,12 +4448,16 @@ img { max-width: 100%; height: auto; }
   font-weight: 700;
 }
 
-/* ---- the horizontally scrolling artwork --------------------- */
+/* ---- the horizontally scrolling artwork ---------------------
+   The frame is a plain window: no fill, so nothing shows through the
+   slanted bottom cut. The photo is shown at its native tone — no
+   brightness or contrast filter — so its lighting matches the rest
+   of the page. ---------------------------------------------------- */
 .nm-hero-media-frame {
   position: relative;
   overflow: hidden;
   height: clamp(300px, 44vh, 430px);
-  background: #070E1C;
+  background: transparent;
   clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
 }
 
@@ -4479,7 +4466,7 @@ img { max-width: 100%; height: auto; }
   top: 0;
   left: 0;
   display: flex;
-  width: 200%;
+  width: 400%;
   height: 100%;
   animation: nmHeroTrackLeft 28s linear infinite;
   will-change: transform;
@@ -4490,26 +4477,16 @@ img { max-width: 100%; height: auto; }
   height: 100%;
   object-fit: cover;
   object-position: 50% 50%;
-  filter: saturate(1.05) contrast(1.06) brightness(0.92);
 }
 
-/* The seam-free loop: the track is 200% wide and holds two identical
-   frames, so travelling exactly -50% lands frame 2 where frame 1
-   started. Direction is right-to-left; there is no vertical travel. */
+/* The seam-free loop: the track is 400% wide and holds two identical
+   frames, each two frame-widths across. Sliding exactly -50% lands
+   frame 2 where frame 1 started. Because each copy is wider than the
+   window, the join between them never crosses the visible area.
+   Direction is right-to-left; there is no vertical travel. */
 @keyframes nmHeroTrackLeft {
   from { transform: translate3d(0, 0, 0); }
   to   { transform: translate3d(-50%, 0, 0); }
-}
-
-/* Faint scan sweep for depth. Horizontal, matching the track. */
-.nm-hero-media-scan {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(5, 10, 25, 0.62) 0%, transparent 26%, transparent 68%, rgba(5, 10, 25, 0.80) 100%),
-    radial-gradient(rgba(178, 206, 255, 0.07) 1px, transparent 1.2px);
-  background-size: 100% 100%, 22px 22px;
 }
 
 /* ---- chip that hangs off the media panel -------------------- */
