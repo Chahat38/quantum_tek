@@ -100,6 +100,21 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
 .trust-section::before { background: linear-gradient(to right, #FFFFFF 0%, rgba(255,255,255,0) 100%); }
 .trust-section::after  { background: linear-gradient(to left,  #FFFFFF 0%, rgba(255,255,255,0) 100%); }
 
+/* The eyebrow was a 12%-opacity blue on a near-white section, so it measured
+   passable but read as faint next to the partner logos. It is a trust signal,
+   so give it a solid brand-blue chip with white copy: unambiguous at a glance. */
+.trust-label {
+  font-size: 0.875rem !important;
+  font-weight: 700 !important;
+  color: #FFFFFF !important;
+  background: #2A75BF !important;
+  border: 1px solid #1D5CA0 !important;
+  padding: 8px 22px !important;
+  box-shadow: 0 2px 8px rgba(42, 117, 191, 0.28);
+}
+.trust-label i, .trust-label .fa-infinity { color: #FFFFFF !important; }
+.trust-label:hover { background: #1D5CA0 !important; }
+
 .qt-card,
 .blog-card,
 .service-card,
@@ -208,20 +223,36 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
 .qt-navbar .navbar-brand:hover .brand-icon-svg { filter: drop-shadow(0 2px 6px rgba(42,117,191,0.35)); }
 
 /* The hamburger bars are painted var(--text-white) in the base sheet, which is
-   invisible on this now-white navbar. Give the control a real surface and the
-   bars a dark ink colour, in both the closed and the .active (X) states. */
+   invisible on this now-white navbar. The control gets no permanent fill so it
+   does not read as a grey smudge on the white bar; the bars get real ink, and
+   the surface only appears on hover/active/focus. */
 .qt-toggler {
-  background: rgba(15, 23, 42, 0.05) !important;
-  border-color: var(--border) !important;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  gap: 5px;
+  background: transparent !important;
+  border: 1px solid transparent !important;
 }
-.qt-toggler span { background: var(--text) !important; }
+.qt-toggler span {
+  width: 22px;
+  height: 3px;
+  background: var(--text) !important;
+}
 .qt-toggler:hover {
+  background: rgba(42, 117, 191, 0.10) !important;
+  border-color: rgba(42, 117, 191, 0.35) !important;
+}
+.qt-toggler:hover span { background: var(--secondary) !important; }
+.qt-toggler.active {
   background: rgba(42, 117, 191, 0.12) !important;
   border-color: var(--accent) !important;
 }
-.qt-toggler:hover span { background: var(--secondary) !important; }
-.qt-toggler.active { background: rgba(42, 117, 191, 0.12) !important; border-color: var(--accent) !important; }
 .qt-toggler.active span { background: var(--secondary) !important; }
+/* bars are 3px tall with 5px gaps, so the first/last rows travel 8px to cross */
+.qt-toggler.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.qt-toggler.active span:nth-child(2) { opacity: 0; }
+.qt-toggler.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 .qt-toggler:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* --------------------------------------------------------------------------
