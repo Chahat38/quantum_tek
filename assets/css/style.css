@@ -737,52 +737,65 @@ textarea:focus-visible,
   .hero-bg-slide:nth-child(1) { opacity: 1; }
 }
 
-/* ------------------------------------------------------------
+   /* ------------------------------------------------------------
    Admin-configured looping background layer.
-   Activated from admin/hero-settings.php via JS (hero-media-active):
-   --hero-bg image is tiled and slowly scrolled; overlay opacity
+   Activated from admin/hero-settings.php (hero-media-active): the
+   3-4 uploaded photos ride a right-to-left track; overlay opacity
    drives the ::before gradient for text legibility.
    ------------------------------------------------------------ */
 .hero-loop-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
+  overflow: hidden;
   pointer-events: none;
   background-color: #0A1220;
-  background-repeat: repeat;
-  background-size: 800px;
-  background-position: 0 0;
   opacity: 0;
   transition: opacity 0.6s ease;
 }
-.hero-section.hero-media-active .hero-loop-bg {
-  opacity: 1;
-  background-image: var(--hero-bg);
-  background-repeat: repeat;
-  background-size: 800px;
-  animation: heroLoopScroll var(--hero-anim-duration, 45s) linear infinite;
+
+/* The photos sit on a horizontal track that slides right-to-left. The
+   markup repeats the image list once, so there are 2N frames and the
+   track is (2N x 100%) wide. --hero-loop-count, written inline by PHP,
+   lets one rule size both the track and its frames for any N:
+     track  = 2N x 100%
+     frame  = 100% / 2N   ->  exactly 100% of the hero
+   Translating the track -50% then covers N frames, i.e. precisely one
+   pass of the list, so frame N+1 lands where frame 1 began. Nothing
+   moves vertically and the join never crosses the visible area. */
+.hero-section.hero-media-active .hero-loop-bg { opacity: 1; }
+
+.hero-loop-track {
+  display: flex;
+  width: calc(var(--hero-loop-count, 2) * 2 * 100%);
+  height: 100%;
+  will-change: transform;
+  animation: heroTrackRightToLeft var(--hero-anim-duration, 45s) linear infinite;
 }
-/* Cover fit (photos) — fills the hero without tiling, slow vertical pan */
-.hero-section.hero-media-active[data-hero-style="cover"] .hero-loop-bg {
+.hero-loop-item {
+  flex: 0 0 calc(100% / (var(--hero-loop-count, 2) * 2));
+  height: 100%;
   background-repeat: no-repeat;
-  background-size: cover;
   background-position: center;
-  animation-name: heroPanCover;
+  background-size: cover;
 }
-@keyframes heroPanCover {
-  0%   { background-position: 50% 0%; }
-  100% { background-position: 50% 100%; }
+@keyframes heroTrackRightToLeft {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
-.hero-section.hero-media-active.hero-media-static .hero-loop-bg,
-.hero-section.hero-media-active.hero-media-static[data-hero-style="cover"] .hero-loop-bg {
+/* Cover fit (photos) — each frame fills the hero without letterboxing */
+.hero-section.hero-media-active[data-hero-style="tile"] .hero-loop-item {
+  background-size: 800px;
+  background-repeat: repeat;
+}
+/* Static / reduced motion: hold the first frame. The track keeps its full
+   width, so every later frame stays clipped off to the right. */
+.hero-section.hero-media-active.hero-media-static .hero-loop-track,
+.hero-section.hero-media-static .hero-loop-track {
   animation: none !important;
 }
-@keyframes heroLoopScroll {
-  from { background-position: 0 0; }
-  to   { background-position: 800px 400px; }
-}
 @media (prefers-reduced-motion: reduce) {
-  .hero-section.hero-media-active .hero-loop-bg { animation: none !important; }
+  .hero-section .hero-loop-track { animation: none !important; }
 }
 /* A custom background is the base layer; the four-image crossfade loop
    still plays over it. Only the flat texture stands down, and the loop
@@ -4307,9 +4320,9 @@ img { max-width: 100%; height: auto; }
 
    The foreground media panel that used to sit in the right-hand
    column has been removed. Nothing occupies that space now: the
-   admin-configured background photo (--hero-bg, set from
-   hero_bg_image) and the .hero-bg-slideshow crossfade carry the
-   full width, so the scene reads continuous behind the copy.
+   3-4 admin-configured photos (hero_bg_images) ride a
+   right-to-left track behind the copy, so the scene reads
+   continuous across the full width.
 
    MOTION IS HORIZONTAL ONLY. The background keyframes below move
    the image right-to-left and never upward.
@@ -4518,14 +4531,6 @@ img { max-width: 100%; height: auto; }
   25%             { opacity: 0; transform: translate3d(-7%, 0, 0) scale(1.06); }
   100%            { opacity: 0; }
 }
-@keyframes heroPanCover {
-  0%   { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-@keyframes heroLoopScroll {
-  from { background-position: 800px 0; }
-  to   { background-position: 0 0; }
-}
 
 /* ============================================================
    FIXED-BANNER SAFE AREA
@@ -4568,5 +4573,129 @@ img { max-width: 100%; height: auto; }
   .nm-hero-panel--copy .nm-hero-award-tag { margin-bottom: 14px; }
   .nm-hero-panel--copy .nm-hero-giant-block { margin-bottom: 16px; }
   .nm-hero-panel--copy .nm-hero-desc { margin-bottom: 20px; }
+}
+
+/* ============================================================
+   PHONE AND TABLET LAYOUT
+   ------------------------------------------------------------
+   On a 390x844 screen the copy panel is ~420px tall. Forcing the
+   hero to 100dvh left roughly 425px of empty background split
+   above and below it, so the content read as small and stranded.
+   Below 768px the hero now hugs its own height: the heading is
+   scaled up, the rhythm is tightened, and the social row stands
+   in for the circular wheel, which is hidden under 1200px.
+   ============================================================ */
+
+.nm-hero-1-social-row { display: none; }
+
+/* Matches the breakpoint where the circular wheel is switched off
+   (see .nm-hero-1-social-position at max-width: 991px), so the two
+   presentations never appear at the same time. */
+@media (max-width: 991px) {
+  .nm-hero-1-social-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(148, 197, 255, 0.16);
+  }
+  .nm-hero-1-social-row-label {
+    flex: 0 0 auto;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(219, 234, 254, 0.72);
+  }
+  .nm-hero-1-social-row-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .nm-hero-1-social-row-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* 44px keeps every target at the recommended touch minimum. */
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 17px;
+    color: #dbeafe;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(125, 211, 252, 0.34);
+    transition: background 0.25s ease, border-color 0.25s ease,
+                color 0.25s ease, transform 0.25s ease;
+  }
+  .nm-hero-1-social-row-links a:hover,
+  .nm-hero-1-social-row-links a:focus-visible {
+    background: rgba(125, 211, 252, 0.2);
+    border-color: rgba(125, 211, 252, 0.75);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .nm-hero-1-social-row-links .soc-wa:hover { color: #25d366; }
+  .nm-hero-1-social-row-links .soc-tw:hover { color: #e7e9ea; }
+  .nm-hero-1-social-row-links .soc-li:hover { color: #0a66c2; }
+  .nm-hero-1-social-row-links .soc-ig:hover { color: #e1306c; }
+  .nm-hero-1-social-row-links .soc-fb:hover { color: #1877f2; }
+}
+
+@media (max-width: 767px) {
+  /* Hug the content instead of pinning to the viewport. The fixed nav is
+     58px tall, so this leaves a comfortable gap under it. */
+  .hero-section {
+    min-height: auto;
+    align-items: flex-start;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .nm-hero-diag {
+    padding-top: 82px;
+    padding-bottom: 46px;
+  }
+  /* Keep the panel clear of the nav's drop shadow. */
+  .nm-hero-panel--copy {
+    padding: 24px 20px 26px 18px;
+  }
+  .nm-giant-row-1 .nm-giant-word,
+  .nm-giant-row-2 .nm-giant-word {
+    font-size: clamp(30px, 8.6vw, 44px);
+  }
+  .nm-hero-panel--copy .nm-hero-sub-title { margin-bottom: 12px; }
+  .nm-hero-panel--copy .nm-hero-award-tag { margin-bottom: 16px; }
+  .nm-hero-panel--copy .nm-hero-giant-block { margin-bottom: 18px; }
+  .nm-hero-panel--copy .nm-hero-desc { margin-bottom: 22px; }
+  /* Buttons go full width so both targets clear 44px on a phone. */
+  .nm-hero-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .nm-hero-cta-row .nm-hero-plybtn,
+  .nm-hero-cta-row .nm-hero-agency-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .nm-hero-1-social-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 374px) {
+  .nm-hero-diag { padding-top: 74px; padding-bottom: 40px; }
+  .nm-hero-panel--copy { padding: 20px 16px 22px 14px; }
+  .nm-giant-row-1 .nm-giant-word,
+  .nm-giant-row-2 .nm-giant-word { font-size: 29px; }
+  .nm-hero-panel--copy .nm-hero-desc { font-size: 14px; margin-bottom: 20px; }
+  /* Tighten the gap so five 44px targets still fit on one row. */
+  .nm-hero-1-social-row-links { gap: 7px; }
+  .nm-hero-1-social-row-links a { font-size: 16px; }
 }
 

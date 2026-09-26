@@ -47,20 +47,62 @@
 // Fetches /api/hero-settings.php and applies the configured
 // background image / overlay / animation via CSS custom props.
 // ============================================================
+
+// Server-rendered frames use root-relative urls while the API returns
+// absolute ones; compare them on the path so a matching list is a no-op.
+function normalizeBg(url) {
+  return String(url || '').replace(/^https?:\/\/[^/]+/i, '').replace(/^\/+/, '');
+}
+
 (async function () {
   const hero = document.querySelector('.hero-section');
   if (!hero) return;
 
+  // The slides themselves are rendered server-side from hero_bg_images, so
+  // this only has to keep the live settings in sync for an operator who
+  // changes them without the page being re-rendered from PHP.
   try {
     const res = await fetch('api/hero-settings.php');
     if (!res.ok) return;
     const payload = await res.json();
     if (!payload.success) return;
     const d = payload.data || {};
-    if (!d.has_custom_bg || !d.hero_bg_image_url) return;
+    if (!d.has_custom_bg) return;
+
+    const slides = hero.querySelectorAll('.hero-loop-item');
+    const urls = Array.isArray(d.hero_bg_image_urls) ? d.hero_bg_image_urls : [];
+
+    // Compare the rendered frames against the configured list, so swapping a
+    // photo while keeping the same frame count also repaints.
+    const current = [];
+    for (let i = 0; i < slides.length; i++) {
+      const m = /url\(['"]?([^'")]+)['"]?\)/.exec(slides[i].style.backgroundImage || '');
+      if (m) current.push(m[1]);
+    }
+    // The server renders the list twice for a seamless wrap.
+    const firstPass = current.slice(0, current.length / 2);
+    const changed = urls.length && (
+      firstPass.length !== urls.length ||
+      firstPass.some((u, i) => normalizeBg(u) !== normalizeBg(urls[i]))
+    );
+
+    if (changed) {
+      const track = hero.querySelector('.hero-loop-track');
+      if (track) {
+        track.innerHTML = '';
+        // Rendered twice so the -50% keyframe wraps without a seam.
+        for (let pass = 0; pass < 2; pass++) {
+          urls.forEach(function (u) {
+            const item = document.createElement('div');
+            item.className = 'hero-loop-item';
+            item.style.backgroundImage = "url('" + u + "')";
+            track.appendChild(item);
+          });
+        }
+      }
+    }
 
     hero.classList.add('hero-media-active');
-    hero.style.setProperty('--hero-bg', "url('" + d.hero_bg_image_url + "')");
     hero.style.setProperty('--hero-overlay-opacity', String(Math.max(0.5, d.overlay_opacity / 100)));
     hero.style.setProperty('--hero-anim-duration', d.animation_duration + 's');
     hero.dataset.heroStyle = d.hero_bg_style === 'tile' ? 'tile' : 'cover';
@@ -68,7 +110,7 @@
       hero.classList.add('hero-media-static');
     }
   } catch (e) {
-    // Keep the default slideshow on any network/parse error
+    // Server-rendered slides stay on screen; nothing to do.
   }
 })();
 

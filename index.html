@@ -127,9 +127,20 @@
 <!-- ============================================================
      HERO SECTION
      ============================================================ -->
-<section class="hero-section nm-hero-1-area nm-hero-diag hero-media-active" id="hero" aria-label="Hero" data-hero-style="cover" style="--hero-bg: url('/uploads/hero/2026/09/37be05a9faae75b5_1790311194.jpeg'); --hero-overlay-opacity: 0.8; --hero-anim-duration: 45s;">
-  <!-- Admin-configured looping background layer (image/opacity/speed from site settings) -->
-  <div class="hero-loop-bg" id="heroLoopBg" aria-hidden="true"></div>
+<section class="hero-section nm-hero-1-area nm-hero-diag hero-media-active" id="hero" aria-label="Hero" data-hero-style="cover" style="--hero-overlay-opacity:0.8;--hero-anim-duration:45s;">
+  <!-- Admin-configured looping background: 3-4 photos on a right-to-left track -->
+  <div class="hero-loop-bg" id="heroLoopBg" aria-hidden="true">
+    <div class="hero-loop-track" style="--hero-loop-count:4">
+              <div class="hero-loop-item" style="background-image:url('/uploads/hero/2026/09/37be05a9faae75b5_1790311194.jpeg')"></div>
+              <div class="hero-loop-item" style="background-image:url('/assets/images/about-team.jpg')"></div>
+              <div class="hero-loop-item" style="background-image:url('/assets/images/about-visual.jpg')"></div>
+              <div class="hero-loop-item" style="background-image:url('/assets/images/team_ceo.jpg')"></div>
+                    <div class="hero-loop-item" style="background-image:url('/uploads/hero/2026/09/37be05a9faae75b5_1790311194.jpeg')"></div>
+              <div class="hero-loop-item" style="background-image:url('/assets/images/about-team.jpg')"></div>
+              <div class="hero-loop-item" style="background-image:url('/assets/images/about-visual.jpg')"></div>
+              <div class="hero-loop-item" style="background-image:url('/assets/images/team_ceo.jpg')"></div>
+          </div>
+  </div>
   <!-- Auto-scrolling background slideshow (AI / Cloud / Cybersecurity / Infrastructure) -->
   <div class="hero-bg-slideshow" aria-hidden="true">
     <div class="hero-bg-slide"></div>
@@ -191,20 +202,33 @@
               <span class="nm-agency-text">Get Started</span>
             </a>
           </div>
+
+          <!-- Phones and tablets: the circular wheel is hidden below 1200px,
+               so the same destinations get a horizontal row here instead. -->
+          <div class="nm-hero-1-social-row" aria-label="Social Media Links">
+            <span class="nm-hero-1-social-row-label">Follow Us</span>
+            <div class="nm-hero-1-social-row-links">
+              <a class="soc-wa" href="https://wa.me/923335114546" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+              <a class="soc-tw" href="https://twitter.com" target="_blank" rel="noopener" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+              <a class="soc-li" href="https://www.linkedin.com/company/quantum-tech-it-solution/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a class="soc-ig" href="https://instagram.comsolutionz" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              <a class="soc-fb" href="https://www.facebook.com/profile.php?id=61594065643076" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- RIGHT CIRCULAR SOCIAL LINKS WHEEL (MATHEMATICALLY CENTERED IN NEON BAND) -->
-    <div class="nm-hero-1-social-position" aria-label="Social Media Links">
+  <div class="nm-hero-1-social-position" aria-label="Social Media Links">
     <div class="nm-hero-1-social-border" aria-hidden="true"></div>
     <div class="nm-hero-1-social-link">
       <a class="link-elm soc-wa" href="https://wa.me/923335114546" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
       <a class="link-elm soc-tw" href="https://twitter.com" target="_blank" rel="noopener" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
-      <a class="link-elm soc-li" href="https://linkedin.com/company/quantum-tech-solutionz" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a class="link-elm soc-li" href="https://www.linkedin.com/company/quantum-tech-it-solution/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
       <a class="link-elm soc-ig" href="https://instagram.comsolutionz" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-      <a class="link-elm soc-fb" href="https://facebook.comsolutionz" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a class="link-elm soc-fb" href="https://www.facebook.com/profile.php?id=61594065643076" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
     </div>
   </div>
 
@@ -1301,8 +1325,8 @@
     </div>
 
     <div class="swiper testimonials-swiper swiper-initialized swiper-horizontal swiper-backface-hidden" aria-label="Client testimonials carousel">
-      <div class="swiper-wrapper" id="swiper-wrapper-d1f7eb4efa5ef516" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-880px, 0px, 0px); transition-delay: 0ms;">
-                <div class="swiper-slide" role="group" aria-label="1 / 5" data-swiper-slide-index="0" style="width: 416px; margin-right: 24px;">
+      <div class="swiper-wrapper" id="swiper-wrapper-740bda021a678833" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-440px, 0px, 0px); transition-delay: 0ms;">
+                <div class="swiper-slide swiper-slide-prev" role="group" aria-label="1 / 5" data-swiper-slide-index="0" style="width: 416px; margin-right: 24px;">
           <div class="testimonial-card">
             <div class="testimonial-stars" aria-label="5 out of 5 stars">
               <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>            </div>
@@ -1317,7 +1341,7 @@
             </div>
           </div>
         </div>
-                <div class="swiper-slide swiper-slide-prev" role="group" aria-label="2 / 5" data-swiper-slide-index="1" style="width: 416px; margin-right: 24px;">
+                <div class="swiper-slide swiper-slide-active" role="group" aria-label="2 / 5" data-swiper-slide-index="1" style="width: 416px; margin-right: 24px;">
           <div class="testimonial-card">
             <div class="testimonial-stars" aria-label="5 out of 5 stars">
               <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>            </div>
@@ -1332,7 +1356,7 @@
             </div>
           </div>
         </div>
-                <div class="swiper-slide swiper-slide-active" role="group" aria-label="3 / 5" data-swiper-slide-index="2" style="width: 416px; margin-right: 24px;">
+                <div class="swiper-slide swiper-slide-next" role="group" aria-label="3 / 5" data-swiper-slide-index="2" style="width: 416px; margin-right: 24px;">
           <div class="testimonial-card">
             <div class="testimonial-stars" aria-label="5 out of 5 stars">
               <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>            </div>
@@ -1347,7 +1371,7 @@
             </div>
           </div>
         </div>
-                <div class="swiper-slide swiper-slide-next" role="group" aria-label="4 / 5" data-swiper-slide-index="3" style="width: 416px; margin-right: 24px;">
+                <div class="swiper-slide" role="group" aria-label="4 / 5" data-swiper-slide-index="3" style="width: 416px; margin-right: 24px;">
           <div class="testimonial-card">
             <div class="testimonial-stars" aria-label="5 out of 5 stars">
               <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>            </div>
@@ -1378,7 +1402,7 @@
           </div>
         </div>
               </div>
-      <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal" style="margin-top:24px;position:relative;"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 3" aria-current="true"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span></div>
+      <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal" style="margin-top:24px;position:relative;"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 2" aria-current="true"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span></div>
     <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
   </div>
 </section>
@@ -1668,7 +1692,7 @@ Saturday: 10:00 AM - 2:00 PM</p>
           <h3 style="margin-bottom:24px;">Send Us a Message</h3>
           <div id="formFeedback" class="alert" style="display:none;" role="alert"></div>
           <form id="contactForm" action="#" data-static-form="1" method="POST" novalidate="">
-            <input type="hidden" name="csrf_token" value="000c47bb50af4e5729790c573ff9a000e790d81446b507f729cc210083adeb2a">            <div class="row g-3">
+            <input type="hidden" name="csrf_token" value="f2da41981c4465fd30c7a8d6c4938e9d7a026ddc90c49670b9d42212a224480a">            <div class="row g-3">
               <div class="col-md-6">
                 <div class="qt-form-group">
                   <label class="qt-label" for="contactName">Full Name *</label>
@@ -1803,7 +1827,7 @@ Saturday: 10:00 AM - 2:00 PM</p>
         <div style="margin-top:20px;">
           <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:8px;">Subscribe to our newsletter</p>
           <form class="newsletter-form" id="newsletterForm" action="#" data-static-form="1" method="POST">
-            <input type="hidden" name="csrf_token" value="000c47bb50af4e5729790c573ff9a000e790d81446b507f729cc210083adeb2a">            <input type="email" class="newsletter-input" name="email" placeholder="Your email" required="" aria-label="Email for newsletter">
+            <input type="hidden" name="csrf_token" value="f2da41981c4465fd30c7a8d6c4938e9d7a026ddc90c49670b9d42212a224480a">            <input type="email" class="newsletter-input" name="email" placeholder="Your email" required="" aria-label="Email for newsletter">
             <button type="submit" class="newsletter-btn" aria-label="Subscribe"><i class="bi bi-send"></i></button>
           </form>
         </div>
