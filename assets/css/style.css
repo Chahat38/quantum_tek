@@ -4300,20 +4300,19 @@ img { max-width: 100%; height: auto; }
 /* ============================================================
    HERO — DIAGONAL COMMAND DECK
    ------------------------------------------------------------
-   Replaces the previous single-column hero with an asymmetric
-   two-panel composition:
+   A single angled copy panel over the full-bleed background
+   scene. The panel's slanted edge is cut with clip-path so the
+   diagonal reads as part of the section's structure rather than
+   a box dropped on top of the photo.
 
-        [ angled copy panel ]  ⧵  [ angled media panel ]
+   The foreground media panel that used to sit in the right-hand
+   column has been removed. Nothing occupies that space now: the
+   admin-configured background photo (--hero-bg, set from
+   hero_bg_image) and the .hero-bg-slideshow crossfade carry the
+   full width, so the scene reads continuous behind the copy.
 
-   Both panels are cut with clip-path so every slanted edge runs on
-   the same angle. That shared angle is what makes the two halves
-   read as one designed object instead of two boxes.
-
-   MOTION IS HORIZONTAL ONLY. The media panel holds a single
-   200%-wide track containing two copies of the artwork; sliding it
-   to -50% loops forever with no seam and no vertical drift. The
-   background keyframes below are redefined for the same reason —
-   the image travels right-to-left and never upward.
+   MOTION IS HORIZONTAL ONLY. The background keyframes below move
+   the image right-to-left and never upward.
 
    The right edge reserves room for .nm-hero-1-social-position
    (200x420 crescent, right:-20px, z-index 15) at >=1200px.
@@ -4411,33 +4410,6 @@ img { max-width: 100%; height: auto; }
   top: -9%;
 }
 
-/* ---- editorial index marker --------------------------------- */
-.nm-hero-index {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #dbeafe;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
-  margin-bottom: 20px;
-}
-.nm-hero-index b {
-  color: #93c5fd;
-  font-weight: 800;
-}
-.nm-hero-index i {
-  font-style: normal;
-  color: rgba(219, 234, 254, 0.7);
-}
-.nm-hero-index span {
-  color: #dbeafe;
-  font-weight: 700;
-}
-
 /* ---- copy elements re-tuned for the panel ------------------- */
 .nm-hero-panel--copy .nm-hero-sub-title,
 .nm-hero-panel--copy .nm-hero-award-tag,
@@ -4492,11 +4464,6 @@ img { max-width: 100%; height: auto; }
   .nm-hero-panel--copy {
     padding: 26px 22px 30px 20px;
   }
-  .nm-hero-index {
-    margin-bottom: 16px;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-  }
   .nm-hero-panel--copy .nm-hero-desc {
     max-width: 100%;
     margin-bottom: 24px;
@@ -4515,9 +4482,6 @@ img { max-width: 100%; height: auto; }
   }
   .nm-hero-panel--copy {
     padding: 18px 18px 22px 16px;
-  }
-  .nm-hero-index {
-    margin-bottom: 10px;
   }
   .nm-hero-panel--copy .nm-hero-award-tag {
     margin-bottom: 12px;
