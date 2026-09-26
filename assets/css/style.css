@@ -4365,8 +4365,7 @@ img { max-width: 100%; height: auto; }
 
 /* ---- columns ----------------------------------------------- */
 @media (min-width: 992px) {
-  .nm-hero-col--copy   { flex: 0 0 55%; max-width: 55%; }
-  .nm-hero-col--media { flex: 0 0 45%; max-width: 45%; }
+  .nm-hero-col--copy { flex: 0 0 55%; max-width: 55%; }
 }
 
 .nm-hero-col {
@@ -4412,15 +4411,6 @@ img { max-width: 100%; height: auto; }
   top: -9%;
 }
 
-/* The artwork carries the whole right column, edge to edge. No fill and no
-   padding here: a tinted background plus padding is what read as a dark
-   rectangular mat around the photo. Only the slanted silhouette remains. */
-.nm-hero-panel--media {
-  padding: 0;
-  background: none;
-  clip-path: polygon(var(--nm-dx) 0, 100% 0, 100% 100%, 0 100%);
-}
-
 /* ---- editorial index marker --------------------------------- */
 .nm-hero-index {
   display: flex;
@@ -4446,100 +4436,6 @@ img { max-width: 100%; height: auto; }
 .nm-hero-index span {
   color: #dbeafe;
   font-weight: 700;
-}
-
-/* ---- the horizontally scrolling artwork ---------------------
-   The frame is a plain window: no fill, so nothing shows through the
-   slanted bottom cut. The photo is shown at its native tone — no
-   brightness or contrast filter — so its lighting matches the rest
-   of the page. ---------------------------------------------------- */
-.nm-hero-media-frame {
-  position: relative;
-  overflow: hidden;
-  height: clamp(300px, 44vh, 430px);
-  background: transparent;
-  clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
-}
-
-.nm-hero-media-track {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  width: 400%;
-  height: 100%;
-  animation: nmHeroTrackLeft 28s linear infinite;
-  will-change: transform;
-}
-.nm-hero-media-img {
-  flex: 0 0 50%;
-  width: 50%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;
-}
-
-/* The seam-free loop: the track is 400% wide and holds two identical
-   frames, each two frame-widths across. Sliding exactly -50% lands
-   frame 2 where frame 1 started. Because each copy is wider than the
-   window, the join between them never crosses the visible area.
-   Direction is right-to-left; there is no vertical travel. */
-@keyframes nmHeroTrackLeft {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-50%, 0, 0); }
-}
-
-/* ---- chip that hangs off the media panel -------------------- */
-.nm-hero-media-chip {
-  position: absolute;
-  left: clamp(14px, 2.4vw, 28px);
-  bottom: clamp(18px, 2.6vw, 30px);
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 8px 15px;
-  border-radius: 4px 12px 4px 12px;
-  background: rgba(4, 10, 24, 0.94);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(125, 211, 252, 0.55);
-  color: #eaf4ff;
-  font-family: 'Poppins', sans-serif;
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
-  animation: nmHeroReveal 0.6s ease-out 0.7s both;
-}
-.nm-hero-media-chip i {
-  color: #7dd3fc;
-  font-size: 0.9em;
-}
-
-/* ---- vertical rail under the media panel -------------------- */
-.nm-hero-rail {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 18px;
-  padding-left: clamp(8px, 2vw, 26px);
-  font-family: 'Poppins', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: #e2e8f0;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
-}
-.nm-hero-rail-line {
-  display: block;
-  width: 54px;
-  height: 2px;
-  background: linear-gradient(90deg, rgba(147, 197, 253, 0.95), rgba(96, 165, 250, 0));
-}
-.nm-hero-rail-text {
-  white-space: nowrap;
 }
 
 /* ---- copy elements re-tuned for the panel ------------------- */
@@ -4581,14 +4477,11 @@ img { max-width: 100%; height: auto; }
     --nm-dx: 54px;
     padding-top: clamp(104px, 12vh, 128px);
   }
-  .nm-hero-col--copy { order: 1; }
-  .nm-hero-col--media { order: 2; margin-top: 26px; }
-  .nm-hero-panel--copy {
-    clip-path: polygon(0 0, 100% 0, calc(100% - var(--nm-dx)) 100%, 0 100%);
+    .nm-hero-col--copy { order: 1; }
+    .nm-hero-panel--copy {
+      clip-path: polygon(0 0, 100% 0, calc(100% - var(--nm-dx)) 100%, 0 100%);
+    }
   }
-  .nm-hero-media-frame { height: clamp(240px, 34vh, 330px); }
-  .nm-hero-rail { display: none; }
-}
 
 /* ---- mobile ------------------------------------------------ */
 @media (max-width: 767px) {
@@ -4607,14 +4500,6 @@ img { max-width: 100%; height: auto; }
   .nm-hero-panel--copy .nm-hero-desc {
     max-width: 100%;
     margin-bottom: 24px;
-  }
-  .nm-hero-media-frame {
-    height: clamp(200px, 26vh, 260px);
-  }
-  .nm-hero-media-chip {
-    font-size: 12px;
-    font-weight: 700;
-    padding: 7px 13px;
   }
   .nm-hero-diag-line--1 { display: none; }
 }
@@ -4654,12 +4539,6 @@ img { max-width: 100%; height: auto; }
   .nm-hero-cta-row .nm-hero-agency-btn {
     height: 46px;
   }
-  .nm-hero-col--media {
-    margin-top: 18px;
-  }
-  .nm-hero-media-frame {
-    height: clamp(170px, 22vh, 210px);
-  }
 }
 
 /* ---- very narrow phones ------------------------------------ */
@@ -4682,25 +4561,6 @@ img { max-width: 100%; height: auto; }
 @keyframes heroLoopScroll {
   from { background-position: 800px 0; }
   to   { background-position: 0 0; }
-}
-
-/* ---- reduced motion: hold the first frame, still legible ---- */
-@media (prefers-reduced-motion: reduce) {
-  .nm-hero-media-track,
-  .nm-hero-media-chip {
-    animation: none;
-  }
-  .nm-hero-media-track {
-    width: 100%;
-    transform: none;
-  }
-  .nm-hero-media-img {
-    flex: 0 0 100%;
-    width: 100%;
-  }
-  .nm-hero-media-track .nm-hero-media-img + .nm-hero-media-img {
-    display: none;
-  }
 }
 
 /* ============================================================
@@ -4728,16 +4588,6 @@ img { max-width: 100%; height: auto; }
   .cookie-notice .btn-qt.btn-sm {
     padding: 6px 15px;
     font-size: 0.78rem;
-  }
-}
-
-/* On phones and tablets the media frame is full width and sits low, so a
-   bottom-anchored chip lands in the banner's strip. Anchor it to the top
-   of the frame instead. */
-@media (max-width: 991px) {
-  .nm-hero-media-chip {
-    top: 14px;
-    bottom: auto;
   }
 }
 
