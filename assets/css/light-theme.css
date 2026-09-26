@@ -1,0 +1,458 @@
+/* ==========================================================================
+   Quantum Tech - Light theme overlay
+   --------------------------------------------------------------------------
+   Loaded AFTER assets/css/style.css, and only in the static build.
+
+   Intent: white becomes the primary colour (page surface + default text) and
+   the brand blue becomes the secondary colour. The hero keeps its dark scrim
+   because it sits on a photograph and the copy has to stay readable there.
+
+   The base stylesheet paints most of its own chrome dark and hardcodes a lot
+   of #fff text, so this file has to flip both the surfaces and the text, then
+   re-assert white inside the two places that stay dark (hero, blue CTA band).
+   ========================================================================== */
+
+:root {
+  /* --- the swap -------------------------------------------------------- */
+  --primary:        #FFFFFF;   /* page surface (was #1A1C20)              */
+  --secondary:      #2A75BF;   /* the brand blue is now the secondary      */
+  --charcoal:       #0F172A;
+  --dark:           #F1F5F9;   /* was #141619 - now a light slate          */
+  --darker:         #E2E8F0;
+  --navy:           #1E3A5F;
+  --surface:        #FFFFFF;
+  --surface-2:      #F1F5F9;
+
+  /* --- dark text on the light surface ---------------------------------- */
+  --text:           #0F172A;
+  --text-muted:     #475569;
+  --text-subtle:    #64748B;
+
+  /* --- the light blues were tuned for a dark page and vanish on white --- */
+  --accent-light:   #1D5CA0;   /* was #549EEB - 2.8:1 on white            */
+  --accent-bright:  #2A75BF;   /* was #8EC5FA                            */
+  --accent-glow:    rgba(42, 117, 191, 0.10);
+
+  /* --- borders: the old ones were white-on-dark and vanish on white --- */
+  --border:         rgba(15, 23, 42, 0.10);
+  --border-light:   rgba(15, 23, 42, 0.16);
+
+  --gradient-dark:  linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+  --gradient-hero:  linear-gradient(135deg, #F8FAFC 0%, #E8F0FA 55%, #DCE9F7 100%);
+  --gradient-card:  linear-gradient(145deg, #FFFFFF 0%, #F8FAFC 100%);
+
+  --shadow-sm:      0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-md:      0 4px 16px rgba(15, 23, 42, 0.10);
+  --shadow-lg:      0 12px 36px rgba(15, 23, 42, 0.12);
+}
+
+body { background-color: var(--primary); color: var(--text); }
+
+/* --------------------------------------------------------------------------
+   1. Headings - the base sheet sets every h1-h6 to #fff
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 { color: var(--text); }
+.section-title,
+.about-card-title,
+.service-card h3,
+.cert-strip-title,
+.tech-card-header-text h3,
+.contact-info-item h3,
+.footer-heading,
+.blog-body h3,
+.excellence-item h3,
+.why-item h3,
+.industry-card h3,
+.team-card h3,
+.testimonial-text { color: var(--text); }
+
+/* re-assert white where the surface really is dark / blue */
+.hero-section h1, .hero-section h2, .hero-section h3, .hero-section h4,
+.hero-section h5, .hero-section h6,
+.nm-hero-section h1, .nm-hero-section h2, .nm-hero-section h3,
+.cta-section h1, .cta-section h2, .cta-section h3, .cta-section h4,
+.cta-section .cta-title,
+.section-surface h1, .section-surface h2, .section-surface h3,
+.section-surface h4, .section-surface h5, .section-surface h6,
+.nm-hero-plybtn, .nm-hero-plybtn .plybtn-text, .nm-hero-plybtn .plybtn-icon,
+.nm-hero-sub-title, .nm-hero-desc, .nm-hero-award-tag,
+.nm-hero-agency-btn, .nm-hero-1-social-row-links a { color: #FFFFFF; }
+
+/* --------------------------------------------------------------------------
+   2. Surfaces that were hardcoded dark
+   -------------------------------------------------------------------------- */
+.section-dark,
+.founder-section { background: var(--primary) !important; color: var(--text) !important; }
+.section-dark p, .section-dark h1, .section-dark h2, .section-dark h3,
+.section-dark h4, .section-dark span, .section-dark li,
+.founder-section p, .founder-section h1, .founder-section h2,
+.founder-section h3, .founder-section span, .founder-section li { color: var(--text); }
+.section-dark .section-desc, .founder-section .section-desc { color: var(--text-muted); }
+
+.page-hero { background: var(--gradient-hero) !important; }
+.page-hero h1, .page-hero h2, .page-hero .page-hero-desc { color: var(--text) !important; }
+.page-hero .section-desc { color: var(--text-muted) !important; }
+.qt-breadcrumb, .qt-breadcrumb a { color: var(--text-muted) !important; }
+.qt-breadcrumb .separator, .qt-breadcrumb .current { color: var(--text-subtle) !important; }
+.qt-breadcrumb a:hover, .qt-breadcrumb .current { color: var(--secondary) !important; }
+
+.trust-section { background: linear-gradient(180deg, #EFF6FF 0%, #F8FAFC 50%, #EFF6FF 100%); }
+.trust-section::before { background: linear-gradient(to right, #FFFFFF 0%, rgba(255,255,255,0) 100%); }
+.trust-section::after  { background: linear-gradient(to left,  #FFFFFF 0%, rgba(255,255,255,0) 100%); }
+
+.qt-card,
+.blog-card,
+.service-card,
+.excellence-item,
+.why-item,
+.industry-card,
+.team-card,
+.tech-capability-card,
+.tree-card,
+.cert-strip-card,
+.stat-card {
+  background: #FFFFFF !important;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  color: var(--text);
+}
+.qt-card:hover, .blog-card:hover, .service-card:hover, .excellence-item:hover,
+.why-item:hover, .industry-card:hover, .team-card:hover,
+.tech-capability-card:hover, .tree-card:hover, .stat-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-accent);
+}
+.tree-card-apex { background: linear-gradient(145deg, #EFF6FF 0%, #FFFFFF 100%) !important; }
+
+.stat-card, .cert-strip-card {
+  background: linear-gradient(145deg, #FFFFFF 0%, #F1F5F9 100%) !important;
+}
+.stat-card .stat-value, .stat-card .stat-label { color: var(--text) !important; }
+.stat-label, .cert-strip-text, .blog-meta, .service-num { color: var(--text-subtle) !important; }
+.stat-card .stat-value { color: var(--secondary) !important; }
+.cert-strip-status { color: #15803D !important; background: rgba(21, 128, 61, 0.10) !important; }
+.cert-strip-icon { background: rgba(42, 117, 191, 0.12); color: var(--accent); }
+.cert-strip-title { color: var(--text) !important; }
+
+/* the services list paints itself dark with !important, twice over */
+#services .service-card,
+#services-list .service-card {
+  background: #FFFFFF !important;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  color: var(--text) !important;
+}
+#services .service-card h3, #services-list .service-card h3 { color: var(--text) !important; }
+#services .service-card p, #services-list .service-card p { color: var(--text-muted) !important; }
+#services .section-desc, #services-list .section-desc { color: var(--text-muted) !important; }
+#services .service-num, #services-list .service-num { color: rgba(42, 117, 191, 0.30) !important; }
+#services .service-feature, #services-list .service-feature { color: var(--text-muted) !important; }
+#services-list .service-card-tag { color: var(--accent) !important; background: rgba(42,117,191,0.10) !important; }
+#services .service-link, #services-list .service-link { color: var(--accent) !important; background: rgba(42,117,191,0.10) !important; }
+#services .service-link:hover, #services-list .service-link:hover { color: #FFFFFF !important; background: var(--secondary) !important; }
+#services-list .service-link .service-link-arrow { color: var(--accent) !important; }
+#services-list .service-link:hover .service-link-arrow { color: #FFFFFF !important; }
+.service-card-img { background: var(--surface-2) !important; }
+.service-card-img .overlay { background: linear-gradient(to top, rgba(8,12,16,0.72) 0%, transparent 60%) !important; }
+
+/* icon wells keep the blue tint, lifted for a light page */
+.why-item .icon, .industry-icon, .tech-halo-icon, .about-card-icon,
+.excellence-icon, .service-icon, .tree-avatar-wrap {
+  background: rgba(42, 117, 191, 0.10) !important;
+  color: var(--secondary) !important;
+  border: 1px solid var(--border-accent);
+}
+.why-item:hover .icon, .industry-card:hover .industry-icon, .tech-capability-card:hover .tech-halo-icon {
+  background: var(--secondary) !important; color: #FFFFFF !important; border-color: var(--secondary) !important;
+}
+.industry-badge-num { color: rgba(42, 117, 191, 0.45) !important; }
+.industry-card-footer { color: var(--text-muted) !important; }
+.industry-card-footer i { color: var(--secondary) !important; }
+
+.why-item p, .industry-card p, .about-card-text, .excellence-item p,
+.tree-member-desig, .qt-card p, .service-card p, .team-card p { color: var(--text-muted) !important; }
+.tree-member-name, .tree-btn-connect { color: var(--text) !important; }
+.tree-btn-connect { background: var(--secondary) !important; color: #FFFFFF !important; }
+.tree-status-pulse { border-color: #FFFFFF !important; }
+.nm-hero-agency-btn:hover .nm-agency-icon { background: var(--accent-dark) !important; }
+
+/* --------------------------------------------------------------------------
+   3. The one place a solid blue reads as a feature
+   -------------------------------------------------------------------------- */
+.cta-section { background: linear-gradient(135deg, #2A75BF 0%, #1D5CA0 100%) !important; }
+.cta-section p, .cta-section span, .cta-section li,
+.cta-section .section-desc, .cta-section .cta-sub { color: rgba(255,255,255,0.88) !important; }
+.section-surface { background-color: var(--secondary) !important; color: #FFFFFF !important; }
+.section-surface h1, .section-surface h2, .section-surface h3, .section-surface h4,
+.section-surface h5, .section-surface h6, .section-surface p, .section-surface li,
+.section-surface span, .section-surface a { color: #FFFFFF !important; }
+
+/* --------------------------------------------------------------------------
+   4. Floating navbar
+   -------------------------------------------------------------------------- */
+.qt-navbar {
+  background: rgba(255, 255, 255, 0.88);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+}
+.qt-navbar.scrolled { background-color: rgba(255, 255, 255, 0.97); box-shadow: 0 6px 24px rgba(15,23,42,0.10); }
+.qt-navbar .navbar-collapse { background: rgba(255, 255, 255, 0.99); border: 1px solid var(--border); }
+.qt-navbar .nav-link { color: var(--text) !important; }
+.qt-navbar .nav-link:hover, .qt-navbar .nav-link.active { color: var(--secondary) !important; }
+.qt-navbar .brand-text-block, .brand-text-block .brand-name,
+.brand-text-block .brand-tagline, .brand-text-block .brand-main,
+.brand-text-block .brand-sub { color: var(--text) !important; }
+.brand-icon-svg { filter: drop-shadow(0 1px 3px rgba(15, 23, 42, 0.18)); }
+.qt-navbar .navbar-brand:hover .brand-icon-svg { filter: drop-shadow(0 2px 6px rgba(42,117,191,0.35)); }
+
+/* --------------------------------------------------------------------------
+   5. Footer
+   -------------------------------------------------------------------------- */
+.qt-footer { background: var(--surface-2) !important; color: var(--text) !important; border-top: 1px solid var(--border); }
+.qt-footer h1, .qt-footer h2, .qt-footer h3, .qt-footer h4, .qt-footer h5, .qt-footer h6 { color: var(--text) !important; }
+.qt-footer p, .qt-footer a, .qt-footer li, .qt-footer span,
+.footer-about, .footer-links a, .footer-contact-item,
+.footer-bottom p, .footer-bottom a { color: var(--text-muted) !important; }
+.qt-footer a:hover, .footer-bottom a:hover { color: var(--secondary) !important; }
+.footer-heading { color: var(--text) !important; }
+.footer-brand .logo { color: var(--text) !important; }
+.footer-bottom { border-top: 1px solid var(--border) !important; }
+.footer-social a { background: rgba(42,117,191,0.10) !important; color: var(--secondary) !important; }
+.footer-social a:hover { background: var(--secondary) !important; color: #FFFFFF !important; }
+.footer-soc-icon, .qt-footer .soc-icon { color: var(--secondary) !important; }
+.newsletter-input { background: #FFFFFF !important; color: var(--text) !important; border-color: var(--border-light) !important; }
+.newsletter-input::placeholder { color: var(--text-subtle) !important; }
+.newsletter-btn { background: var(--secondary) !important; color: #FFFFFF !important; }
+
+/* --------------------------------------------------------------------------
+   6. Forms, badges, small type
+   -------------------------------------------------------------------------- */
+.qt-label { color: var(--text) !important; }
+.qt-input, .qt-select, .qt-textarea {
+  background: #FFFFFF !important; color: var(--text) !important; border-color: var(--border-light) !important;
+}
+.qt-input::placeholder, .qt-textarea::placeholder { color: var(--text-subtle) !important; }
+.qt-select option { background: #FFFFFF; color: var(--text); }
+
+.qt-badge.badge-accent, .badge-accent, .blog-category-badge,
+.project-category, .blog-tag {
+  background: rgba(42, 117, 191, 0.10) !important;
+  color: var(--accent) !important;
+  border: 1px solid var(--border-accent) !important;
+}
+.qt-badge.badge-muted { background: var(--surface-2) !important; color: var(--text-muted) !important; border-color: var(--border) !important; }
+.badge-pill { background: rgba(42,117,191,0.10) !important; color: var(--accent) !important; border-color: var(--border-accent) !important; }
+
+.eyebrow { color: var(--accent) !important; }
+.section-title span, .section-title mark { color: var(--accent) !important; }
+.section-desc { color: var(--text-muted) !important; }
+.text-info, a.text-info { color: var(--accent) !important; }
+.service-link { color: var(--accent) !important; }
+.service-link:hover { color: var(--secondary) !important; }
+
+.cookie-notice { background: #FFFFFF !important; color: var(--text) !important; border: 1px solid var(--border) !important; box-shadow: var(--shadow-lg); }
+.cookie-notice p { color: var(--text-muted) !important; }
+.cookie-notice .divider { background: var(--border) !important; }
+.cookie-notice a { color: var(--accent) !important; }
+.cookie-notice .btn-qt.btn-outline { color: var(--text) !important; border-color: var(--border-light) !important; background: #FFFFFF !important; }
+.cookie-notice .btn-qt.btn-accent, .cookie-notice button.btn-accent { color: #FFFFFF !important; background: var(--secondary) !important; }
+
+.btn-outline { color: var(--text) !important; border-color: var(--border-light) !important; }
+.btn-outline:hover { color: var(--secondary) !important; border-color: var(--secondary) !important; background: rgba(42,117,191,0.06) !important; }
+.btn-accent { color: #FFFFFF !important; }
+
+.testimonial-text { color: var(--text) !important; }
+.team-social a { color: var(--secondary) !important; }
+.team-social a:hover { color: #FFFFFF !important; }
+.tech-chip { background: rgba(42,117,191,0.08) !important; color: var(--text) !important; border-color: var(--border-accent) !important; }
+.tech-capability-card:hover .tech-chip { background: rgba(42,117,191,0.16) !important; }
+.tech-readiness .pulse-dot, .tree-status-pulse { background: #00A870 !important; }
+
+::selection { background: rgba(42, 117, 191, 0.22); color: #0F172A; }
+::-webkit-scrollbar-track { background: #F1F5F9; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+/* ==========================================================================
+   7. High-specificity repairs
+   --------------------------------------------------------------------------
+   The base sheet paints class-less headings white, and several components set
+   their text inline with color:var(--text-white). Neither can be reached by a
+   plain token flip, so these rules are deliberately specific and !important,
+   and white is re-asserted afterwards for the dark/blue surfaces.
+   ========================================================================== */
+
+/* every heading, whatever its class, is dark on the light page */
+body h1, body h2, body h3, body h4, body h5, body h6 { color: var(--text) !important; }
+
+/* inline color:var(--text-white) that the base sheet bakes into the markup */
+[style*="var(--text-white)"] { color: var(--text) !important; }
+
+/* re-assert white on the surfaces that really are dark or blue */
+body .hero-section h1, body .hero-section h2, body .hero-section h3,
+body .hero-section h4, body .hero-section h5, body .hero-section h6,
+body .nm-hero-section h1, body .nm-hero-section h2, body .nm-hero-section h3,
+body .cta-section h1, body .cta-section h2, body .cta-section h3, body .cta-section h4,
+body .section-surface h1, body .section-surface h2, body .section-surface h3,
+body .section-surface h4, body .section-surface h5, body .section-surface h6,
+.hero-section [style*="var(--text-white)"],
+.nm-hero-section [style*="var(--text-white)"],
+.cta-section [style*="var(--text-white)"],
+.section-surface [style*="var(--text-white)"] { color: #FFFFFF !important; }
+
+body .section-surface .section-title,
+body .section-surface .section-title span,
+body .section-surface .section-title mark { color: #FFFFFF !important; }
+
+/* the white cards sitting inside the blue band keep dark text */
+.section-surface .qt-card, .section-surface .service-card,
+.section-surface .excellence-item, .section-surface .blog-card,
+.section-surface .stat-card, .section-surface .tree-card,
+.section-surface .industry-card, .section-surface .why-item,
+.section-surface .team-card, .section-surface .tech-capability-card,
+.section-surface .cert-strip-card { color: var(--text) !important; }
+.section-surface .qt-card h3, .section-surface .qt-card h4,
+.section-surface .service-card h3, .section-surface .service-card p,
+.section-surface .excellence-item h3, .section-surface .blog-card h3,
+.section-surface .stat-card .stat-value, .section-surface .stat-card .stat-label,
+.section-surface .tree-member-name, .section-surface .tree-member-desig,
+.section-surface .cert-strip-title, .section-surface .cert-strip-text,
+.section-surface .industry-card h3, .section-surface .why-item h3,
+.section-surface .team-card h3, .section-surface .tech-capability-card h3 { color: var(--text) !important; }
+.section-surface .service-card p, .section-surface .industry-card p,
+.section-surface .why-item p, .section-surface .cert-strip-text,
+.section-surface .tree-member-desig, .section-surface .stat-label { color: var(--text-muted) !important; }
+.section-surface .service-num, .section-surface .industry-badge-num { color: var(--accent) !important; }
+.section-surface .service-link, .section-surface .service-link-text,
+.section-surface .service-card-tag { color: var(--accent-dark) !important; }
+.section-surface .eyebrow, .section-surface .section-desc { color: rgba(255,255,255,0.88) !important; }
+
+/* the .section-surface p rule above also lands on copy inside the white cards,
+   so the card bodies have to be re-asserted after it */
+.section-surface .qt-card p, .section-surface .qt-card p *,
+.section-surface .excellence-item p, .section-surface .excellence-item p *,
+.section-surface .cert-strip-card p, .section-surface .stat-card p,
+.section-surface .team-card p, .section-surface .blog-card p,
+.section-surface .project-card p, .section-surface .tech-capability-card p { color: var(--text-muted) !important; }
+
+/* ghost numerals: solid enough to read, still clearly decorative */
+.service-num, .industry-badge-num { color: var(--accent) !important; }
+
+/* a blue that clears 4.5:1 on the pale blue chips it sits in */
+:root { --accent-dark: #1A5FA8; }
+.service-card-tag, .service-link, .service-link-text,
+.qt-badge.badge-accent, .badge-accent, .blog-category-badge,
+.project-category, .badge-pill, .qt-breadcrumb .current { color: #1A5FA8 !important; }
+.qt-breadcrumb .separator { color: var(--text-muted) !important; }
+
+.tree-role-tag, .tree-role-tag.tech, .tree-role-tag.business,
+.tree-role-tag.operations { color: var(--accent-dark) !important; }
+.testimonial-avatar { color: var(--accent-dark) !important; }
+
+/* project cards were never in the dark-to-light list */
+.project-card, .project-card h2, .project-card h3, .project-card p,
+.project-body p, .project-body h3, .project-meta .service-link { color: var(--text) !important; }
+.project-card { background: #FFFFFF !important; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+.project-body p { color: var(--text-muted) !important; }
+.project-meta .service-link { color: var(--accent-dark) !important; }
+.project-card .project-category { color: #1A5FA8 !important; background: rgba(42,117,191,0.10) !important; }
+
+/* ==========================================================================
+   8. Remaining component repairs
+   ========================================================================== */
+
+/* a readable red for the required-field asterisk on white */
+:root { --danger: #DC2626; }
+.qt-label *, .form-label * { color: var(--danger) !important; }
+
+/* ghost numerals: solid accent clears 3:1 as large text on white */
+#services .service-num, #services-list .service-num,
+.service-num, .industry-badge-num { color: var(--accent) !important; }
+#services-list .service-card .service-card-tag, .service-card-tag { color: #1A5FA8 !important; }
+#services-list .service-card .service-link-text,
+#services-list .service-card .service-link { color: #1A5FA8 !important; }
+
+/* eyebrow on the pale page hero needs the darker blue */
+.page-hero .eyebrow, .page-hero .qt-breadcrumb .current,
+.eyebrow.no-line { color: #1A5FA8 !important; }
+/* ...but inside the solid blue band pure white is the only passing colour */
+.section-surface .eyebrow, .section-surface .eyebrow.no-line,
+.cta-section .eyebrow, .section-surface .section-desc,
+.cta-section .section-desc { color: #FFFFFF !important; }
+
+/* about info cards were still dark */
+.about-info-card {
+  background: #FFFFFF !important; border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-sm) !important; color: var(--text) !important;
+}
+.about-info-card .about-card-title { color: var(--text) !important; }
+.about-info-card .about-card-text { color: var(--text-muted) !important; }
+
+/* legal pages use a Bootstrap .bg-dark card for the policy body */
+.card.bg-dark, .legal-content, .legal-content * {
+  background-color: transparent !important; color: var(--text) !important;
+}
+.card.bg-dark { background-color: #FFFFFF !important; border-color: var(--border) !important; }
+.card.bg-dark .text-info, .legal-content .text-info { color: #1A5FA8 !important; }
+.card.bg-dark p, .card.bg-dark span, .card.bg-dark li,
+.card.bg-dark h1, .card.bg-dark h2, .card.bg-dark h3 { color: var(--text) !important; }
+.card.bg-dark p, .card.bg-dark li { color: var(--text-muted) !important; }
+
+/* blue contact strip keeps white copy */
+#contact-strip, #contact-strip * { color: #FFFFFF !important; }
+#contact-strip p[style*="text-muted"], #contact-strip .text-muted { color: #FFFFFF !important; }
+#contact-strip .btn-qt.btn-outline, #contact-strip .btn-outline {
+  color: #FFFFFF !important; border-color: rgba(255,255,255,0.75) !important;
+}
+#contact-strip .btn-qt.btn-outline:hover { background: #FFFFFF !important; color: var(--secondary) !important; }
+
+/* the 404 section is unclassed; make it a light panel */
+#not-found-section { background: var(--bg-subtle) !important; }
+
+/* certification status chip inside the blue band */
+.section-surface .cert-strip-status {
+  color: #15803D !important; background: rgba(21, 128, 61, 0.10) !important;
+}
+
+/* newsletter block: muted copy sits on a pale blue wash */
+.newsletter-card, .newsletter-card p, .newsletter-wrap p {
+  color: #1E293B !important;
+}
+.newsletter-card p[style*="text-muted"], .newsletter-wrap p[style*="text-muted"] { color: #334155 !important; }
+
+/* The blog sidebar CTA is a class-less card whose gradient is inline and mixes
+   --secondary with --dark. --dark is a light token in this theme, so the band
+   would fade to near-white under white text; pin it to a dark blue instead. */
+div:has(> #sidebarNewsletter) {
+  background: linear-gradient(135deg, #1D4E8F 0%, #12325C 100%) !important;
+  border-color: rgba(42, 117, 191, 0.40) !important;
+}
+div:has(> #sidebarNewsletter),
+div:has(> #sidebarNewsletter) p,
+div:has(> #sidebarNewsletter) h5,
+div:has(> #sidebarNewsletter) label { color: #FFFFFF !important; }
+div:has(> #sidebarNewsletter) p[style*="text-muted"] { color: rgba(255,255,255,0.92) !important; }
+div:has(> #sidebarNewsletter) .qt-input {
+  background: rgba(255, 255, 255, 0.96) !important; color: var(--text) !important;
+  border-color: transparent !important;
+}
+
+/* The stats band is a --secondary -> --dark gradient. Averaging its stops hides
+   the fact that one end is saturated blue, so make the whole band pale and let
+   the dark stat text stay readable across the full width. */
+.stats-section {
+  background: linear-gradient(135deg, #E8F1FA 0%, #F8FAFC 100%) !important;
+  border-color: var(--border) !important;
+}
+
+/* outline buttons sitting on the solid blue bands need white copy */
+.cta-section .btn-qt.btn-outline, .section-surface .btn-qt.btn-outline,
+.cta-section .btn-outline, .section-surface .btn-outline {
+  color: #FFFFFF !important; border-color: rgba(255,255,255,0.75) !important;
+}
+.cta-section .btn-qt.btn-outline:hover, .section-surface .btn-qt.btn-outline:hover,
+.cta-section .btn-outline:hover, .section-surface .btn-outline:hover {
+  background: #FFFFFF !important; color: var(--secondary) !important;
+}
