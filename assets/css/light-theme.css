@@ -207,6 +207,23 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
 .brand-icon-svg { filter: drop-shadow(0 1px 3px rgba(15, 23, 42, 0.18)); }
 .qt-navbar .navbar-brand:hover .brand-icon-svg { filter: drop-shadow(0 2px 6px rgba(42,117,191,0.35)); }
 
+/* The hamburger bars are painted var(--text-white) in the base sheet, which is
+   invisible on this now-white navbar. Give the control a real surface and the
+   bars a dark ink colour, in both the closed and the .active (X) states. */
+.qt-toggler {
+  background: rgba(15, 23, 42, 0.05) !important;
+  border-color: var(--border) !important;
+}
+.qt-toggler span { background: var(--text) !important; }
+.qt-toggler:hover {
+  background: rgba(42, 117, 191, 0.12) !important;
+  border-color: var(--accent) !important;
+}
+.qt-toggler:hover span { background: var(--secondary) !important; }
+.qt-toggler.active { background: rgba(42, 117, 191, 0.12) !important; border-color: var(--accent) !important; }
+.qt-toggler.active span { background: var(--secondary) !important; }
+.qt-toggler:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
 /* --------------------------------------------------------------------------
    5. Footer
    -------------------------------------------------------------------------- */
