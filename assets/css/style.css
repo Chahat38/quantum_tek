@@ -4103,7 +4103,7 @@ img { max-width: 100%; height: auto; }
 /* Primary — blue gradient with a coloured shadow for depth */
 .nm-hero-agency-btn {
   padding: 0 32px 0 16px;
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  background: linear-gradient(135deg, #1e40af, #2563eb);
   border: 1px solid transparent;
   color: #ffffff;
   font-size: 15px;
@@ -4295,5 +4295,487 @@ img { max-width: 100%; height: auto; }
   .nm-hero-star {
     animation: none;
   }
+}
+
+/* ============================================================
+   HERO — DIAGONAL COMMAND DECK
+   ------------------------------------------------------------
+   Replaces the previous single-column hero with an asymmetric
+   two-panel composition:
+
+        [ angled copy panel ]  ⧵  [ angled media panel ]
+
+   Both panels are cut with clip-path so every slanted edge runs on
+   the same angle. That shared angle is what makes the two halves
+   read as one designed object instead of two boxes.
+
+   MOTION IS HORIZONTAL ONLY. The media panel holds a single
+   200%-wide track containing two copies of the artwork; sliding it
+   to -50% loops forever with no seam and no vertical drift. The
+   background keyframes below are redefined for the same reason —
+   the image travels right-to-left and never upward.
+
+   The right edge reserves room for .nm-hero-1-social-position
+   (200x420 crescent, right:-20px, z-index 15) at >=1200px.
+   ============================================================ */
+
+.nm-hero-diag {
+  --nm-dx: 68px;
+  --nm-rail: 0px;
+  padding-top: clamp(112px, 13vh, 146px);
+  padding-bottom: clamp(48px, 7vh, 84px);
+}
+
+.nm-hero-stage {
+  max-width: 1160px;
+  padding-right: var(--nm-rail);
+}
+
+.nm-hero-grid {
+  --bs-gutter-x: 0;
+  --bs-gutter-y: 0;
+  position: relative;
+  align-items: center;
+}
+
+/* ---- diagonal rules behind the panels ------------------------ */
+.nm-hero-diag-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+}
+.nm-hero-diag-line {
+  position: absolute;
+  top: -40%;
+  height: 180%;
+  width: 1px;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(96, 165, 250, 0.42) 28%,
+    rgba(96, 165, 250, 0.16) 62%,
+    transparent 100%);
+  transform: rotate(-11deg);
+}
+.nm-hero-diag-line--1 { left: 4%;  opacity: 0.30; }
+.nm-hero-diag-line--2 { left: 26%; opacity: 0.55; width: 2px; }
+.nm-hero-diag-line--3 { left: 61%; opacity: 0.40; }
+.nm-hero-diag-line--4 { left: 88%; opacity: 0.22; }
+
+/* ---- columns ----------------------------------------------- */
+@media (min-width: 992px) {
+  .nm-hero-col--copy   { flex: 0 0 55%; max-width: 55%; }
+  .nm-hero-col--media { flex: 0 0 45%; max-width: 45%; }
+}
+
+.nm-hero-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- the two angled panels ---------------------------------- */
+.nm-hero-panel {
+  position: relative;
+}
+
+.nm-hero-panel--copy {
+  padding: clamp(28px, 3.4vw, 46px) clamp(26px, 3.6vw, 52px) clamp(30px, 3.6vw, 48px) clamp(24px, 3vw, 44px);
+  background:
+    linear-gradient(158deg,
+      rgba(13, 28, 54, 0.80) 0%,
+      rgba(9, 18, 36, 0.62) 46%,
+      rgba(7, 14, 28, 0.50) 100%);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  backdrop-filter: blur(16px) saturate(1.15);
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--nm-dx)) 100%, 0 100%);
+}
+
+/* Bright rule that traces the copy panel's slanted right edge. */
+.nm-hero-panel--copy .nm-hero-panel-edge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg,
+    rgba(96, 165, 250, 0) 0%,
+    rgba(96, 165, 250, 0.85) 26%,
+    rgba(147, 197, 253, 0.95) 62%,
+    rgba(96, 165, 250, 0) 100%);
+  box-shadow: 0 0 18px rgba(59, 130, 246, 0.55);
+  transform: translateX(calc(-1 * var(--nm-dx) / 2));
+  transform-origin: top right;
+  /* the edge leans left going down, matching the clip exactly */
+  rotate: 6.1deg;
+  height: 118%;
+  top: -9%;
+}
+
+.nm-hero-panel--media {
+  padding: clamp(14px, 1.5vw, 20px);
+  background: linear-gradient(200deg,
+    rgba(16, 34, 64, 0.72) 0%,
+    rgba(8, 16, 32, 0.50) 100%);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  clip-path: polygon(var(--nm-dx) 0, 100% 0, 100% 100%, 0 100%);
+}
+.nm-hero-panel--media .nm-hero-panel-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 118%;
+  top: -9%;
+  background: linear-gradient(180deg,
+    rgba(96, 165, 250, 0) 0%,
+    rgba(96, 165, 250, 0.80) 30%,
+    rgba(147, 197, 253, 0.92) 66%,
+    rgba(96, 165, 250, 0) 100%);
+  box-shadow: 0 0 18px rgba(59, 130, 246, 0.5);
+  rotate: 6.1deg;
+  transform-origin: top left;
+}
+
+/* ---- editorial index marker --------------------------------- */
+.nm-hero-index {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #dbeafe;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
+  margin-bottom: 20px;
+}
+.nm-hero-index b {
+  color: #93c5fd;
+  font-weight: 800;
+}
+.nm-hero-index i {
+  font-style: normal;
+  color: rgba(219, 234, 254, 0.7);
+}
+.nm-hero-index span {
+  color: #dbeafe;
+  font-weight: 700;
+}
+
+/* ---- the horizontally scrolling artwork --------------------- */
+.nm-hero-media-frame {
+  position: relative;
+  overflow: hidden;
+  height: clamp(300px, 44vh, 430px);
+  background: #070E1C;
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+}
+
+.nm-hero-media-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 200%;
+  height: 100%;
+  animation: nmHeroTrackLeft 28s linear infinite;
+  will-change: transform;
+}
+.nm-hero-media-img {
+  flex: 0 0 50%;
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  filter: saturate(1.05) contrast(1.06) brightness(0.92);
+}
+
+/* The seam-free loop: the track is 200% wide and holds two identical
+   frames, so travelling exactly -50% lands frame 2 where frame 1
+   started. Direction is right-to-left; there is no vertical travel. */
+@keyframes nmHeroTrackLeft {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Faint scan sweep for depth. Horizontal, matching the track. */
+.nm-hero-media-scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(5, 10, 25, 0.62) 0%, transparent 26%, transparent 68%, rgba(5, 10, 25, 0.80) 100%),
+    radial-gradient(rgba(178, 206, 255, 0.07) 1px, transparent 1.2px);
+  background-size: 100% 100%, 22px 22px;
+}
+
+/* ---- chip that hangs off the media panel -------------------- */
+.nm-hero-media-chip {
+  position: absolute;
+  left: clamp(14px, 2.4vw, 28px);
+  bottom: clamp(18px, 2.6vw, 30px);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 15px;
+  border-radius: 4px 12px 4px 12px;
+  background: rgba(4, 10, 24, 0.94);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(125, 211, 252, 0.55);
+  color: #eaf4ff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
+  animation: nmHeroReveal 0.6s ease-out 0.7s both;
+}
+.nm-hero-media-chip i {
+  color: #7dd3fc;
+  font-size: 0.9em;
+}
+
+/* ---- vertical rail under the media panel -------------------- */
+.nm-hero-rail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding-left: clamp(8px, 2vw, 26px);
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #e2e8f0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+.nm-hero-rail-line {
+  display: block;
+  width: 54px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(147, 197, 253, 0.95), rgba(96, 165, 250, 0));
+}
+.nm-hero-rail-text {
+  white-space: nowrap;
+}
+
+/* ---- copy elements re-tuned for the panel ------------------- */
+.nm-hero-panel--copy .nm-hero-sub-title,
+.nm-hero-panel--copy .nm-hero-award-tag,
+.nm-hero-panel--copy .nm-hero-giant-block,
+.nm-hero-panel--copy .nm-hero-desc,
+.nm-hero-panel--copy .nm-hero-cta-row {
+  max-width: 100%;
+  margin-right: 0;
+}
+
+.nm-hero-panel--copy .nm-hero-giant-block {
+  margin-bottom: 22px;
+}
+.nm-hero-panel--copy .nm-hero-desc {
+  max-width: 46ch;
+  margin-bottom: 28px;
+}
+.nm-hero-panel--copy .nm-hero-award-tag {
+  margin-bottom: 18px;
+}
+
+/* Reserve the social wheel's footprint. Measured from the rendered page:
+   the clickable icon column starts at viewport-width-128 at <=1200px (the
+   wheel is scaled 0.82 there) and at viewport-width-160 above that.
+   Below 1200px the stage is viewport-width minus the gutters, so the panel
+   edge lands much closer to the icons and needs the larger reserve. */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .nm-hero-diag { --nm-rail: 146px; }
+}
+@media (min-width: 1200px) {
+  .nm-hero-diag { --nm-rail: 130px; }
+}
+
+/* ---- tablet: stack the media panel under the copy ---------- */
+@media (max-width: 991px) {
+  .nm-hero-diag {
+    --nm-dx: 54px;
+    padding-top: clamp(104px, 12vh, 128px);
+  }
+  .nm-hero-col--copy { order: 1; }
+  .nm-hero-col--media { order: 2; margin-top: 26px; }
+  .nm-hero-panel--copy {
+    clip-path: polygon(0 0, 100% 0, calc(100% - var(--nm-dx)) 100%, 0 100%);
+  }
+  .nm-hero-media-frame { height: clamp(240px, 34vh, 330px); }
+  .nm-hero-rail { display: none; }
+}
+
+/* ---- mobile ------------------------------------------------ */
+@media (max-width: 767px) {
+  .nm-hero-diag {
+    --nm-dx: 40px;
+    padding-bottom: 40px;
+  }
+  .nm-hero-panel--copy {
+    padding: 26px 22px 30px 20px;
+  }
+  .nm-hero-index {
+    margin-bottom: 16px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+  }
+  .nm-hero-panel--copy .nm-hero-desc {
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+  .nm-hero-media-frame {
+    height: clamp(200px, 26vh, 260px);
+  }
+  .nm-hero-media-chip {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 7px 13px;
+  }
+  .nm-hero-diag-line--1 { display: none; }
+}
+
+/* ---- short viewports (landscape phones, small laptops in a narrow
+   window): the stacked hero runs taller than the screen, which pushes the
+   CTA row down behind the fixed cookie notice. Tighten every vertical
+   step so the primary button stays inside the first screen. ---------- */
+@media (max-width: 767px) and (max-height: 780px) {
+  .nm-hero-diag {
+    padding-top: 86px;
+    padding-bottom: 28px;
+  }
+  .nm-hero-panel--copy {
+    padding: 18px 18px 22px 16px;
+  }
+  .nm-hero-index {
+    margin-bottom: 10px;
+  }
+  .nm-hero-panel--copy .nm-hero-award-tag {
+    margin-bottom: 12px;
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+  .nm-hero-panel--copy .nm-hero-giant-block {
+    margin-bottom: 14px;
+  }
+  .nm-hero-panel--copy .nm-hero-desc {
+    margin-bottom: 18px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .nm-hero-cta-row {
+    gap: 10px;
+  }
+  .nm-hero-cta-row .nm-hero-plybtn,
+  .nm-hero-cta-row .nm-hero-agency-btn {
+    height: 46px;
+  }
+  .nm-hero-col--media {
+    margin-top: 18px;
+  }
+  .nm-hero-media-frame {
+    height: clamp(170px, 22vh, 210px);
+  }
+}
+
+/* ---- very narrow phones ------------------------------------ */
+@media (max-width: 374px) {
+  .nm-hero-diag { --nm-dx: 30px; }
+  .nm-hero-panel--copy { padding: 22px 18px 26px 16px; }
+}
+
+/* ---- background artwork: horizontal drift only -------------- */
+@keyframes heroSlideCycle {
+  0%              { opacity: 0; transform: translate3d(7%, 0, 0) scale(1.14); }
+  4%, 21%         { opacity: 1; }
+  25%             { opacity: 0; transform: translate3d(-7%, 0, 0) scale(1.06); }
+  100%            { opacity: 0; }
+}
+@keyframes heroPanCover {
+  0%   { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes heroLoopScroll {
+  from { background-position: 800px 0; }
+  to   { background-position: 0 0; }
+}
+
+/* ---- reduced motion: hold the first frame, still legible ---- */
+@media (prefers-reduced-motion: reduce) {
+  .nm-hero-media-track,
+  .nm-hero-media-chip {
+    animation: none;
+  }
+  .nm-hero-media-track {
+    width: 100%;
+    transform: none;
+  }
+  .nm-hero-media-img {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+  .nm-hero-media-track .nm-hero-media-img + .nm-hero-media-img {
+    display: none;
+  }
+}
+
+/* ============================================================
+   FIXED-BANNER SAFE AREA
+   ------------------------------------------------------------
+   The cookie notice is position:fixed to the bottom edge, so
+   every pixel of its height lands on top of whatever the hero
+   happens to render there. Two things follow: the banner gets
+   slimmer on small screens, and the hero's own furniture moves
+   out of the bottom strip.
+   ============================================================ */
+
+/* Trim the banner's chrome, not its message. 147px -> 111px. */
+@media (max-width: 575px), (max-height: 820px) {
+  .cookie-notice {
+    bottom: 12px;
+    padding: 13px 15px;
+    border-radius: 10px;
+  }
+  .cookie-notice p {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .cookie-notice .btn-qt.btn-sm {
+    padding: 6px 15px;
+    font-size: 0.78rem;
+  }
+}
+
+/* On phones and tablets the media frame is full width and sits low, so a
+   bottom-anchored chip lands in the banner's strip. Anchor it to the top
+   of the frame instead. */
+@media (max-width: 991px) {
+  .nm-hero-media-chip {
+    top: 14px;
+    bottom: auto;
+  }
+}
+
+/* Tablet / short desktop windows: the 2-column hero fits 100vh, which
+   parks the CTA row in the same strip the banner occupies. */
+@media (min-width: 768px) and (max-height: 820px) {
+  .nm-hero-diag {
+    padding-top: 96px;
+    padding-bottom: 32px;
+  }
+  .nm-hero-panel--copy {
+    padding: 22px 24px 24px 20px;
+  }
+  .nm-hero-panel--copy .nm-hero-award-tag { margin-bottom: 14px; }
+  .nm-hero-panel--copy .nm-hero-giant-block { margin-bottom: 16px; }
+  .nm-hero-panel--copy .nm-hero-desc { margin-bottom: 20px; }
 }
 

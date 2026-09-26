@@ -127,7 +127,7 @@
 <!-- ============================================================
      HERO SECTION
      ============================================================ -->
-<section class="hero-section nm-hero-1-area hero-media-active" id="hero" aria-label="Hero" data-hero-style="cover" style="--hero-bg: url('/uploads/hero/2026/09/37be05a9faae75b5_1790311194.jpeg'); --hero-overlay-opacity: 0.8; --hero-anim-duration: 45s;">
+<section class="hero-section nm-hero-1-area nm-hero-diag hero-media-active" id="hero" aria-label="Hero" data-hero-style="cover" style="--hero-bg: url('/uploads/hero/2026/09/37be05a9faae75b5_1790311194.jpeg'); --hero-overlay-opacity: 0.8; --hero-anim-duration: 45s;">
   <!-- Admin-configured looping background layer (image/opacity/speed from site settings) -->
   <div class="hero-loop-bg" id="heroLoopBg" aria-hidden="true"></div>
   <!-- Auto-scrolling background slideshow (AI / Cloud / Cybersecurity / Infrastructure) -->
@@ -141,22 +141,34 @@
   <div class="hero-bg-texture" aria-hidden="true"></div>
   <canvas id="heroCanvas" class="hero-interactive-canvas" aria-hidden="true" width="1440" height="1000"></canvas>
 
-  <div class="container position-relative" style="z-index:5;">
-    <div class="row">
-      <div class="col-12">
-        <div class="nm-hero-content">
-          <!-- 1. Small Heading / Kicker -->
+  <!-- Diagonal accent rules — the section's structural signature -->
+  <div class="nm-hero-diag-lines" aria-hidden="true">
+    <span class="nm-hero-diag-line nm-hero-diag-line--1"></span>
+    <span class="nm-hero-diag-line nm-hero-diag-line--2"></span>
+    <span class="nm-hero-diag-line nm-hero-diag-line--3"></span>
+    <span class="nm-hero-diag-line nm-hero-diag-line--4"></span>
+  </div>
+
+  <div class="container position-relative nm-hero-stage" style="z-index:5;">
+    <div class="row g-0 nm-hero-grid">
+
+      <!-- ============ COPY PANEL (angled left column) ============ -->
+      <div class="col-12 col-lg-6 nm-hero-col nm-hero-col--copy" data-aos-delay="0">
+        <div class="nm-hero-panel nm-hero-panel--copy">
+          <span class="nm-hero-panel-edge" aria-hidden="true"></span>
+          <div class="nm-hero-index" aria-hidden="true">
+            <b>01</b><i>/</i><span>Command Deck</span>
+          </div>
+
           <p class="nm-hero-sub-title">
             Transforming Technology Into Real-World Impact
           </p>
 
-          <!-- 2. Credential Pill -->
           <div class="nm-hero-award-tag">
             <i class="fa-solid fa-certificate"></i>
             <span>ISO 9001:2015 Certified Technology Company in Pakistan</span>
           </div>
 
-          <!-- 3. Giant Title with Floating Neon Star Asterisk -->
           <h1 class="nm-hero-giant-block">
             <span class="nm-giant-row-1">
               <span class="nm-giant-word">Technology</span>
@@ -170,12 +182,10 @@
             <span class="visually-hidden">Provider — AI, Cloud, Cybersecurity, IoT &amp; ICT Infrastructure</span>
           </h1>
 
-          <!-- 4. Description -->
           <p class="nm-hero-desc">
             Quantum Tech Solutionz delivers secure, scalable, and future-ready ICT solutions — from AI and cloud to cybersecurity, IoT, and enterprise infrastructure.
           </p>
 
-          <!-- 5. CTA Row: Watch Intro + Get Started -->
           <div class="nm-hero-cta-row">
             <a href="/assets/images/plybtn-video-1.mp4" class="nm-hero-plybtn" data-bs-toggle="modal" data-bs-target="#heroVideoModal" aria-label="Watch Introduction Video">
               <span class="plybtn-icon" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
@@ -186,6 +196,34 @@
               <span class="nm-agency-text">Get Started</span>
             </a>
           </div>
+        </div>
+      </div>
+
+      <!-- ============ MEDIA PANEL (angled right column) ============ -->
+      <div class="col-12 col-lg-6 nm-hero-col nm-hero-col--media" data-aos-delay="100">
+        <div class="nm-hero-panel nm-hero-panel--media">
+          <span class="nm-hero-panel-edge" aria-hidden="true"></span>
+
+          <div class="nm-hero-media-frame">
+            <!-- Two copies of the artwork in one 200%-wide track.
+                 The track slides right-to-left forever, so the seam is
+                 never visible and the motion is purely horizontal. -->
+            <div class="nm-hero-media-track" aria-hidden="true">
+              <img class="nm-hero-media-img" src="/assets/images/h1-bg-img-1.webp" alt="">
+              <img class="nm-hero-media-img" src="/assets/images/h1-bg-img-1.webp" alt="">
+            </div>
+            <div class="nm-hero-media-scan" aria-hidden="true"></div>
+          </div>
+
+          <div class="nm-hero-media-chip">
+            <i class="fa-solid fa-arrow-left-long"></i>
+            <span>Live Operations Feed</span>
+          </div>
+        </div>
+
+        <div class="nm-hero-rail" aria-hidden="true">
+          <span class="nm-hero-rail-line"></span>
+          <span class="nm-hero-rail-text">Scroll Left</span>
         </div>
       </div>
     </div>
@@ -548,7 +586,7 @@
         <div class="eyebrow">About Us</div>
         <h2 class="section-title">Empowering Enterprise Digital Transformation</h2>
         <div class="title-underline"></div>
-        <p class="section-desc wide" style="max-width:100%;">Quantum Tech Solutionz is a technology solutions provider and system integrator with nationwide reach in Pakistan, delivering end-to-end digital services across AI, cloud computing, cybersecurity, IoT, and infrastructure solutions. Founded by Kamran Rashid TI, our elite team of developers, designers, and security experts turns bold ideas into powerful, high-performance digital solutions built for long-term success.</p>
+        <p class="section-desc wide" style="max-width:100%;">Quantum Tech Solutionz is a technology solutions provider and system integrator with nationwide reach in Pakistan, delivering end-to-end digital services across AI, cloud computing, cybersecurity, IoT, and infrastructure solutions. Founded by Kamran Rashid TI (M), our elite team of developers, designers, and security experts turns bold ideas into powerful, high-performance digital solutions built for long-term success.</p>
 
         <div class="about-cards-grid row g-3 mt-3 mb-4">
           <!-- Card 1: System Integrator -->
@@ -612,11 +650,11 @@
     <div class="row g-5 align-items-center">
       <!-- Content side -->
       <div class="col-lg-7 order-lg-1 order-2" data-aos="fade-right">
-        <h2 class="section-title" style="margin-top:0;">Kamran Rashid TI</h2>
+        <h2 class="section-title" style="margin-top:0;">Kamran Rashid TI (M)</h2>
         <p style="color:var(--accent-light);font-weight:600;font-size:1.1rem;margin-bottom:8px;">CEO</p>
         <div class="title-underline"></div>
 
-        <p class="section-desc wide" style="max-width:100%;font-size:1.02rem;line-height:1.75;">Kamran Rashid TI is the Founder and CEO of Quantum Tech Solutionz, leading the company with military precision, strategic discipline, and mission-critical engineering standards. Under his command, Quantum Tech Solutionz has established nationwide reach in Pakistan as a premier system integrator — delivering end-to-end digital solutions spanning Cloud Storage &amp; Computing (IaaS, PaaS, SaaS), Artificial Intelligence &amp; Robotics, Defense-Grade Cybersecurity &amp; Managed SOC, High-Availability ICT Infrastructure, Server &amp; Data Center Setup, Telco &amp; IoT Networks, Smart Solar Energy Storage, and Custom Web &amp; Enterprise Applications.</p>
+        <p class="section-desc wide" style="max-width:100%;font-size:1.02rem;line-height:1.75;">Kamran Rashid TI (M) is the Founder and CEO of Quantum Tech Solutionz, leading the company with military precision, strategic discipline, and mission-critical engineering standards. Under his command, Quantum Tech Solutionz has established nationwide reach in Pakistan as a premier system integrator — delivering end-to-end digital solutions spanning Cloud Storage &amp; Computing (IaaS, PaaS, SaaS), Artificial Intelligence &amp; Robotics, Defense-Grade Cybersecurity &amp; Managed SOC, High-Availability ICT Infrastructure, Server &amp; Data Center Setup, Telco &amp; IoT Networks, Smart Solar Energy Storage, and Custom Web &amp; Enterprise Applications.</p>
 
                 <blockquote class="founder-quote">
           "At Quantum Tech Solutionz, we believe technology should solve real problems and create genuine value. Every system we build, every solution we deliver, is designed with one goal in mind: your success. Our commitment is not just to the technology — it's to the outcome it enables."
@@ -627,7 +665,7 @@
       <!-- Image side -->
       <div class="col-lg-5 col-md-6 mx-auto order-lg-2 order-1 text-center" data-aos="fade-left">
         <div class="founder-image-wrap" style="display:inline-block;">
-                      <img src="/assets/images/team_ceo.jpg" alt="Kamran Rashid TI" loading="lazy">
+                      <img src="/assets/images/team_ceo.jpg" alt="Kamran Rashid TI (M)" loading="lazy">
                   </div>
       </div>
     </div>
@@ -1296,7 +1334,7 @@
     </div>
 
     <div class="swiper testimonials-swiper swiper-initialized swiper-horizontal swiper-backface-hidden" aria-label="Client testimonials carousel">
-      <div class="swiper-wrapper" id="swiper-wrapper-af8bee68b76a4613" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-440px, 0px, 0px); transition-delay: 0ms;">
+      <div class="swiper-wrapper" id="swiper-wrapper-76552fa1810452568" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-440px, 0px, 0px); transition-delay: 0ms;">
                 <div class="swiper-slide swiper-slide-prev" role="group" aria-label="1 / 5" data-swiper-slide-index="0" style="width: 416px; margin-right: 24px;">
           <div class="testimonial-card">
             <div class="testimonial-stars" aria-label="5 out of 5 stars">
@@ -1400,10 +1438,10 @@
           <div class="tree-card tree-card-apex">
             <div class="tree-role-tag">{ Executive Leadership }</div>
             <div class="tree-avatar-wrap">
-              <img src="/assets/images/team_ceo.jpg" alt="Kamran Rashid TI" class="tree-avatar-img">
+              <img src="/assets/images/team_ceo.jpg" alt="Kamran Rashid TI (M)" class="tree-avatar-img">
               <div class="tree-status-pulse" title="Active Commander &amp; Executive Leader"></div>
             </div>
-            <h3 class="tree-member-name">Kamran Rashid TI</h3>
+            <h3 class="tree-member-name">Kamran Rashid TI (M)</h3>
             <div class="tree-member-desig">CEO</div>
           </div>
           <div class="tree-stem-down"></div>
@@ -1663,7 +1701,7 @@ Saturday: 10:00 AM - 2:00 PM</p>
           <h3 style="margin-bottom:24px;">Send Us a Message</h3>
           <div id="formFeedback" class="alert" style="display:none;" role="alert"></div>
           <form id="contactForm" action="#" data-static-form="1" method="POST" novalidate="">
-            <input type="hidden" name="csrf_token" value="6a77754a4b7aca18c779e076bd73597140222c25947673e3a063346df1b5ac2d">            <div class="row g-3">
+            <input type="hidden" name="csrf_token" value="8ec6567d52fdf1e5d349c8db3b8ca38d683a95a4e22c49c1a2a2d645721593a9">            <div class="row g-3">
               <div class="col-md-6">
                 <div class="qt-form-group">
                   <label class="qt-label" for="contactName">Full Name *</label>
@@ -1798,7 +1836,7 @@ Saturday: 10:00 AM - 2:00 PM</p>
         <div style="margin-top:20px;">
           <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:8px;">Subscribe to our newsletter</p>
           <form class="newsletter-form" id="newsletterForm" action="#" data-static-form="1" method="POST">
-            <input type="hidden" name="csrf_token" value="6a77754a4b7aca18c779e076bd73597140222c25947673e3a063346df1b5ac2d">            <input type="email" class="newsletter-input" name="email" placeholder="Your email" required="" aria-label="Email for newsletter">
+            <input type="hidden" name="csrf_token" value="8ec6567d52fdf1e5d349c8db3b8ca38d683a95a4e22c49c1a2a2d645721593a9">            <input type="email" class="newsletter-input" name="email" placeholder="Your email" required="" aria-label="Email for newsletter">
             <button type="submit" class="newsletter-btn" aria-label="Subscribe"><i class="bi bi-send"></i></button>
           </form>
         </div>
