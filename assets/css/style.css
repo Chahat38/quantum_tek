@@ -1738,6 +1738,11 @@ textarea:focus-visible,
 .founder-image-wrap {
   position: relative;
   display: inline-block;
+  /* Definite width so the wrap is not shrink-to-fit. The old <img> got its
+     380px from its 1024px intrinsic width being clamped; an icon element has
+     no intrinsic width and would otherwise collapse to the glyph. */
+  width: 100%;
+  max-width: 380px;
 }
 .founder-image-wrap::before {
   content: '';
@@ -1757,6 +1762,26 @@ textarea:focus-visible,
   object-fit: cover;
   aspect-ratio: 3/4;
   background: var(--surface);
+}
+/* Icon variant: stands in for the founder photo inside the same gradient
+   frame. It keeps the 3/4 footprint and the 380px cap of the img above, so
+   swapping the markup for this never shifts the surrounding layout.
+   Scoped to .founder-image-wrap because the light theme paints every span
+   inside .founder-section with --text, which would win on specificity. */
+.founder-image-wrap .founder-icon {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 3/4;
+  border-radius: var(--radius-xl);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-size: clamp(72px, 14vw, 128px);
+  line-height: 1;
 }
 .founder-quote {
   border-left: 3px solid var(--accent);

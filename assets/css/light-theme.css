@@ -403,6 +403,46 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
 }
 .hero-visual-badge-text strong { color: #2A75BF; }
 
+        /* ---- hero photo loop ------------------------------------------
+           The right-side visual crossfades its two photos. Each frame is a
+           stacked layer running the same cycle; the second sits half a cycle
+           behind, so the main card and the small inset card always show
+           DIFFERENT photos rather than the same one twice. The inset card
+           lists its frames in the opposite order to make that swap read as
+           deliberate. Retune with --qt-hero-loop on .hero-visual. --------- */
+        @keyframes qtHeroFrameCycle {
+          0%   { opacity: 1; }
+          46%  { opacity: 1; }
+          50%  { opacity: 0; }
+          96%  { opacity: 0; }
+          100% { opacity: 1; }
+        }
+
+        .hero-visual { --qt-hero-loop: 16s; }
+
+        /* clip the crossfading layers to each card's rounded frame */
+        .hero-visual-main,
+        .hero-visual-card--1 { overflow: hidden; }
+
+        .hero-visual-frame {
+          position: absolute;
+          inset: 0;
+          background-size: cover;
+          background-position: center 38%;
+          opacity: 0;
+          animation: qtHeroFrameCycle var(--qt-hero-loop) ease-in-out infinite;
+        }
+        .hero-visual-frame:nth-child(2) {
+          animation-delay: calc(var(--qt-hero-loop) / -2);
+        }
+        /* the square-ish inset card crops from a different focal point */
+        .hero-visual-card--1 .hero-visual-frame { background-position: center; }
+
+        @media (prefers-reduced-motion: reduce) {
+          .hero-visual-frame { animation: none; }
+          .hero-visual-frame:first-child { opacity: 1; }
+        }
+
 /* mid-wide screens: keep the visual clear of the navy panel column */
 @media (min-width: 1200px) and (max-width: 1399.98px) {
   .hero-visual { width: min(38vw, 520px); }
@@ -482,6 +522,32 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
 .nm-hero-1-social-link .link-elm { color: #112A4F !important; }
 .nm-hero-1-social-link .link-elm:hover { color: #2A75BF !important; }
 .nm-hero-1-social-position::after { border-color: rgba(17, 42, 79, 0.28) !important; }
+
+/* ---- the wheel needs to survive standing on the photo card ----------
+   This wheel was laid out to sit in the empty dark band on the right.
+   The hero redesign put the looping photo card in exactly that band, so
+   three of the five icons (X, LinkedIn, Instagram) now land on the photo
+   and navy-on-photo reads as nothing. Two fixes:
+
+   1. pull the wheel fully inside the viewport - it was hung 20px past the
+      right edge, which the hero's overflow:hidden was clipping.
+   2. give every icon a white chip, so the navy glyph keeps its ~14:1
+      contrast wherever it falls: on the white hero or on the photo.
+
+   The white glow on hover was invisible against a white chip, so it is
+   traded for a shadow that reads as the chip lifting. ------------------- */
+.nm-hero-1-social-position { right: 20px; }
+
+.nm-hero-1-social-link .link-elm {
+  background: #FFFFFF;
+  border: 1px solid rgba(17, 42, 79, 0.10);
+  border-radius: 50%;
+  box-shadow: 0 6px 16px -6px rgba(17, 42, 79, 0.35);
+}
+.nm-hero-1-social-link .link-elm:hover {
+  text-shadow: none;
+  box-shadow: 0 12px 24px -8px rgba(42, 117, 191, 0.55);
+}
 
 /* the crescent arc + ring keyframes paint #3a4b66; retinted above */
 
@@ -748,9 +814,16 @@ body .section-surface .section-title mark { color: #FFFFFF !important; }
 .service-num, .industry-badge-num { color: var(--accent) !important; }
 
 /* navy footer corrections: inline styles + the heading repair paint dark ink
-   that vanishes on the navy footer surface; lift the brand mark to white */
+   that vanishes on the navy footer surface */
 .qt-footer [style*="color:var(--text)"] { color: rgba(255, 255, 255, 0.85) !important; }
-.qt-footer img { filter: brightness(0) invert(1); opacity: 0.95; }
+
+/* The brand mark used to be forced to solid white by a blanket
+   `brightness(0) invert(1)` on every footer image, which flattened the
+   three-colour logo (pink #F0397B, blue #3C7FC3, gold #FCC33E) into a
+   black-and-white silhouette. The logo is the only image in the footer and
+   every one of its colours clears the 3:1 non-text threshold on the navy
+   surface (4.58, 4.12 and 10.68), so it now renders in true brand colour. */
+.qt-footer img { opacity: 1; }
 
 /* the blue contact strip sits directly above the navy footer; align it so the
    two bands read as one navy block with a hairline seam */
