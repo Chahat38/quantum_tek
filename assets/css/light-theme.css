@@ -117,7 +117,6 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
   padding: 8px 22px !important;
   box-shadow: 0 2px 8px rgba(42, 117, 191, 0.28);
 }
-.trust-label i, .trust-label .fa-infinity { color: #FFFFFF !important; }
 .trust-label:hover { background: #1D5CA0 !important; }
 
 .qt-card,
@@ -1056,7 +1055,6 @@ div:has(> #sidebarNewsletter) .qt-input {
   background: #112A4F !important;
   color: #FFFFFF !important;
 }
-.trust-label i, .trust-label .fa-infinity { color: #8EC5FA !important; }
 .trust-label:hover { background: #1D5CA0 !important; }
 
 .marquee-wrap {
