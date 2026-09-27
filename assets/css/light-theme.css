@@ -266,66 +266,157 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
    --------------------------------------------------------------------------
    The user wants the hero images' background WHITE with professional
    colouring. The full-bleed photo wash + dark scrim is replaced by:
-   - a white hero surface, so the right 60% of the hero is clean white;
-   - the looping photos presented as bordered white cards floating on it;
-   - the copy panel becoming a solid NAVY panel (secondary colour) so the
-     white headline type stays as readable as it was on the dark scrim;
-   - navy/blue structural accents (diag lines, panel edge, wheel) retuned
-     for the light surface. */
+   - a white hero surface with a very soft navy wash on the far left;
+   - ONE large photo card floating on the white side (no edge-to-edge
+     background loop, no logo texture — those looked broken: the portrait
+     photos cropped harshly top/bottom at full-bleed, and the inverted
+     logo texture showed as smudged grey marks);
+   - two soft accent cards and one glass "24/7" badge for depth;
+   - the copy panel stays a solid NAVY panel (secondary colour) so the
+     white headline type keeps maximum contrast. */
 .hero-section,
 .hero-section.hero-media-active {
-  background: #FFFFFF !important;
+  background:
+    radial-gradient(ellipse 42% 55% at 86% 30%, rgba(42, 117, 191, 0.07), transparent 70%),
+    linear-gradient(160deg, #FFFFFF 0%, #F6F9FD 60%, #EAF1F9 100%) !important;
 }
 
-/* the layered scrims/grain are dark-theme art direction; on the white
-   surface they turn into faint slate/blue tints instead of mud */
+/* faint navy edge wash on the left so the navy panel and white surface
+   blend instead of colliding; nothing else sits over the white side */
 .hero-section::before,
 .hero-section.hero-media-active::before {
   background:
-    radial-gradient(ellipse 46% 60% at 12% 38%, rgba(17, 42, 79, 0.05), transparent 70%),
     linear-gradient(90deg,
-      rgba(17, 42, 79, 0.10) 0%,
-      rgba(17, 42, 79, 0.05) 34%,
-      rgba(17, 42, 79, 0.015) 56%,
-      rgba(17, 42, 79, 0) 74%) !important;
-}
-.hero-section::after {
-  background-image:
-    linear-gradient(180deg, rgba(17, 42, 79, 0) 86%, rgba(17, 42, 79, 0.06) 95%, rgba(17, 42, 79, 0.10) 100%),
-    radial-gradient(rgba(17, 42, 79, 0.05) 1px, transparent 1.2px) !important;
-  background-size: 100% 100%, 24px 24px !important;
+      rgba(17, 42, 79, 0.06) 0%,
+      rgba(17, 42, 79, 0.025) 30%,
+      rgba(17, 42, 79, 0) 55%) !important;
 }
 
-/* looping photos -> white-framed cards. Each frame insets its photo with a
-   white matte (background-clip: content-box + padding) instead of margins, so
-   the track's loop math (frames = 100%/2N) stays exact and nothing drifts. */
-.hero-loop-bg {
-  background-color: transparent !important;
-}
+/* the old texture/scrim/slideshow layers are removed entirely */
+.hero-section::after,
+.hero-bg-texture,
+.hero-bg-slideshow,
+.hero-loop-bg,
+.hero-loop-track,
 .hero-loop-item {
-  background-size: cover !important;
-  background-position: center !important;
-  background-origin: content-box;
-  background-clip: content-box !important;
-  padding: clamp(10px, 1.2vw, 18px);
-  border-radius: 24px;
-  border: 1px solid rgba(17, 42, 79, 0.14);
-  box-shadow: 0 24px 48px -24px rgba(17, 42, 79, 0.40);
-  filter: saturate(0.98) contrast(1.02);
-}
-.hero-section.hero-media-active[data-hero-style="tile"] .hero-loop-item {
-  background-size: cover !important;
+  display: none !important;
 }
 
-/* admin dim slider becomes a no-op on the white art direction */
-.hero-section { --hero-dim: 0 !important; }
+/* ---- the new right-side visual: one large photo card + accents ---- */
+.hero-visual {
+  position: absolute;
+  top: 50%;
+  right: clamp(20px, 6vw, 96px);
+  transform: translateY(-50%);
+  width: min(46vw, 560px);
+  aspect-ratio: 0.86;
+  z-index: 2;
+  pointer-events: none;
+}
 
-/* fallback SVG slideshow + fluted texture: neutralised on white */
-.hero-bg-slideshow { opacity: 0 !important; }
-.hero-bg-texture { opacity: 0.14 !important; mix-blend-mode: multiply !important; filter: invert(1); }
+/* main photo: object-fit cover inside its own rounded frame, so the
+   picture NEVER bleeds to the hero edge and the crop is controlled */
+.hero-visual-main {
+  position: absolute;
+  inset: clamp(14px, 1.8vw, 26px) 0 0 clamp(14px, 1.8vw, 26px);
+  background-size: cover;
+  background-position: center 38%;
+  border-radius: 26px;
+  border: 1px solid rgba(17, 42, 79, 0.12);
+  box-shadow:
+    0 40px 80px -36px rgba(17, 42, 79, 0.45),
+    0 12px 28px -14px rgba(17, 42, 79, 0.25);
+}
 
-/* interactive particles: navy instead of white-on-dark */
-.hero-interactive-canvas { opacity: 0.55; }
+/* soft accent cards behind/around the photo for depth */
+.hero-visual-card {
+  position: absolute;
+  border-radius: 20px;
+}
+.hero-visual-card--1 {
+  /* small secondary photo, tucked at the bottom-left of the main frame */
+  left: 0;
+  bottom: 6%;
+  width: 38%;
+  aspect-ratio: 1.1;
+  background-size: cover;
+  background-position: center;
+  border-radius: 18px;
+  border: 4px solid #FFFFFF;
+  box-shadow: 0 22px 44px -20px rgba(17, 42, 79, 0.45);
+}
+.hero-visual-card--2 {
+  /* navy echo card peeking behind the top-right corner */
+  top: -6%;
+  right: -4%;
+  width: 34%;
+  aspect-ratio: 1;
+  background: linear-gradient(150deg, #1B3A66 0%, #112A4F 70%);
+  box-shadow: 0 26px 48px -26px rgba(17, 42, 79, 0.55);
+  z-index: -1;
+}
+.hero-visual-card--3 {
+  /* slim blue accent bar along the bottom-right, ties in the brand blue */
+  right: -3%;
+  bottom: -5%;
+  width: 26%;
+  height: 12%;
+  background: linear-gradient(135deg, #2A75BF 0%, #1A5FA8 100%);
+  border-radius: 14px;
+  box-shadow: 0 20px 38px -20px rgba(42, 117, 191, 0.55);
+  z-index: 1;
+}
+
+/* floating glass badge over the photo's bottom-left */
+.hero-visual-badge {
+  position: absolute;
+  left: 4%;
+  bottom: -4%;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(17, 42, 79, 0.10);
+  box-shadow: 0 18px 38px -18px rgba(17, 42, 79, 0.45);
+  z-index: 2;
+}
+.hero-visual-badge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(42, 117, 191, 0.12);
+  color: #2A75BF;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.hero-visual-badge-text {
+  font-size: 0.86rem;
+  color: #112A4F;
+  line-height: 1.3;
+}
+.hero-visual-badge-text strong { color: #2A75BF; }
+
+/* mid-wide screens: keep the visual clear of the navy panel column */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  .hero-visual { width: min(38vw, 520px); }
+}
+
+/* responsive: below 1200px the copy panel is full-width, so the visual
+   hides with it (it would overlap the navy panel); on large screens it
+   sits clear of the panel column */
+@media (max-width: 1199.98px) {
+  .hero-visual { display: none; }
+}
+
+/* interactive particles: soft navy on white */
+.hero-interactive-canvas { opacity: 0.5; }
 
 /* copy panel: solid NAVY (secondary) angled panel, white type */
 .nm-hero-panel--copy {
