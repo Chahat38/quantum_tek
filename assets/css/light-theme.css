@@ -4,18 +4,21 @@
    Loaded AFTER assets/css/style.css, and only in the static build.
 
    Intent: white becomes the primary colour (page surface + default text) and
-   the brand blue becomes the secondary colour. The hero keeps its dark scrim
-   because it sits on a photograph and the copy has to stay readable there.
+   NAVY BLUE (#112A4F) becomes the secondary colour — used for solid section
+   bands, the footer, the CTA band and navy hovers. Brand blue (#2A75BF) stays
+   as the text/link accent for headings and eyebrows. The hero keeps its copy
+   panel but the right-hand side now sits on a clean WHITE background with the
+   looping photos presented as white-framed cards.
 
    The base stylesheet paints most of its own chrome dark and hardcodes a lot
    of #fff text, so this file has to flip both the surfaces and the text, then
-   re-assert white inside the two places that stay dark (hero, blue CTA band).
+   re-assert white inside the places that stay navy (section bands, blue CTA).
    ========================================================================== */
 
 :root {
   /* --- the swap -------------------------------------------------------- */
   --primary:        #FFFFFF;   /* page surface (was #1A1C20)              */
-  --secondary:      #2A75BF;   /* the brand blue is now the secondary      */
+  --secondary:      #112A4F;   /* NAVY BLUE — solid section bands, footer */
   --charcoal:       #0F172A;
   --dark:           #F1F5F9;   /* was #141619 - now a light slate          */
   --darker:         #E2E8F0;
@@ -81,8 +84,10 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
 /* --------------------------------------------------------------------------
    2. Surfaces that were hardcoded dark
    -------------------------------------------------------------------------- */
+/* section-dark bands become a soft slate wash so white → wash → navy
+   alternates down the page (white primary / navy secondary hierarchy) */
 .section-dark,
-.founder-section { background: var(--primary) !important; color: var(--text) !important; }
+.founder-section { background: #F1F5F9 !important; color: var(--text) !important; }
 .section-dark p, .section-dark h1, .section-dark h2, .section-dark h3,
 .section-dark h4, .section-dark span, .section-dark li,
 .founder-section p, .founder-section h1, .founder-section h2,
@@ -163,10 +168,64 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
 #services .service-num, #services-list .service-num { color: rgba(42, 117, 191, 0.30) !important; }
 #services .service-feature, #services-list .service-feature { color: var(--text-muted) !important; }
 #services-list .service-card-tag { color: var(--accent) !important; background: rgba(42,117,191,0.10) !important; }
-#services .service-link, #services-list .service-link { color: var(--accent) !important; background: rgba(42,117,191,0.10) !important; }
-#services .service-link:hover, #services-list .service-link:hover { color: #FFFFFF !important; background: var(--secondary) !important; }
-#services-list .service-link .service-link-arrow { color: var(--accent) !important; }
-#services-list .service-link:hover .service-link-arrow { color: #FFFFFF !important; }
+/* Explore Solution: clean solid-blue pill — no tinted rectangle box on the services page.
+   (later #services-list rules re-assert colors, so text color is re-asserted here with
+   higher specificity to stay white on the solid fill; the home page's services section
+   id is literally "services.html", hence the escaped #services\.html selectors) */
+#services .service-card .service-link,
+#services\.html .service-card .service-link,
+#services-list .service-card .service-link,
+#services .service-card .service-link .service-link-text,
+#services\.html .service-card .service-link .service-link-text,
+#services-list .service-card .service-link .service-link-text {
+  color: #FFFFFF !important;
+}
+#services .service-card .service-link,
+#services\.html .service-card .service-link,
+#services-list .service-card .service-link {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px !important;
+  width: auto !important;
+  align-self: flex-start !important;
+  margin-top: auto !important;
+  padding: 9px 20px !important;
+  border-radius: 999px !important;
+  border: none !important;
+  background: var(--accent) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+#services .service-card .service-link i,
+#services\.html .service-card .service-link i,
+#services-list .service-card .service-link .service-link-arrow {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  color: #FFFFFF !important;
+  transition: transform 0.3s ease;
+}
+#services .service-card .service-link:hover,
+#services\.html .service-card .service-link:hover,
+#services-list .service-card .service-link:hover {
+  background: var(--secondary) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -8px rgba(17, 42, 79, 0.45);
+}
+#services .service-card .service-link:hover i,
+#services\.html .service-card .service-link:hover i,
+#services-list .service-card .service-link:hover .service-link-arrow {
+  color: #FFFFFF !important;
+  transform: translateX(3px);
+}
 .service-card-img { background: var(--surface-2) !important; }
 .service-card-img .overlay { background: linear-gradient(to top, rgba(8,12,16,0.72) 0%, transparent 60%) !important; }
 
@@ -192,9 +251,9 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
 .nm-hero-agency-btn:hover .nm-agency-icon { background: var(--accent-dark) !important; }
 
 /* --------------------------------------------------------------------------
-   3. The one place a solid blue reads as a feature
+   3. The places a solid NAVY reads as a feature (secondary colour bands)
    -------------------------------------------------------------------------- */
-.cta-section { background: linear-gradient(135deg, #2A75BF 0%, #1D5CA0 100%) !important; }
+.cta-section { background: linear-gradient(135deg, #112A4F 0%, #0D1F3C 100%) !important; }
 .cta-section p, .cta-section span, .cta-section li,
 .cta-section .section-desc, .cta-section .cta-sub { color: rgba(255,255,255,0.88) !important; }
 .section-surface { background-color: var(--secondary) !important; color: #FFFFFF !important; }
@@ -203,7 +262,140 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
 .section-surface span, .section-surface a { color: #FFFFFF !important; }
 
 /* --------------------------------------------------------------------------
-   4. Floating navbar
+   4. Hero — clean WHITE right side, professional card presentation
+   --------------------------------------------------------------------------
+   The user wants the hero images' background WHITE with professional
+   colouring. The full-bleed photo wash + dark scrim is replaced by:
+   - a white hero surface, so the right 60% of the hero is clean white;
+   - the looping photos presented as bordered white cards floating on it;
+   - the copy panel becoming a solid NAVY panel (secondary colour) so the
+     white headline type stays as readable as it was on the dark scrim;
+   - navy/blue structural accents (diag lines, panel edge, wheel) retuned
+     for the light surface. */
+.hero-section,
+.hero-section.hero-media-active {
+  background: #FFFFFF !important;
+}
+
+/* the layered scrims/grain are dark-theme art direction; on the white
+   surface they turn into faint slate/blue tints instead of mud */
+.hero-section::before,
+.hero-section.hero-media-active::before {
+  background:
+    radial-gradient(ellipse 46% 60% at 12% 38%, rgba(17, 42, 79, 0.05), transparent 70%),
+    linear-gradient(90deg,
+      rgba(17, 42, 79, 0.10) 0%,
+      rgba(17, 42, 79, 0.05) 34%,
+      rgba(17, 42, 79, 0.015) 56%,
+      rgba(17, 42, 79, 0) 74%) !important;
+}
+.hero-section::after {
+  background-image:
+    linear-gradient(180deg, rgba(17, 42, 79, 0) 86%, rgba(17, 42, 79, 0.06) 95%, rgba(17, 42, 79, 0.10) 100%),
+    radial-gradient(rgba(17, 42, 79, 0.05) 1px, transparent 1.2px) !important;
+  background-size: 100% 100%, 24px 24px !important;
+}
+
+/* looping photos -> white-framed cards. Each frame insets its photo with a
+   white matte (background-clip: content-box + padding) instead of margins, so
+   the track's loop math (frames = 100%/2N) stays exact and nothing drifts. */
+.hero-loop-bg {
+  background-color: transparent !important;
+}
+.hero-loop-item {
+  background-size: cover !important;
+  background-position: center !important;
+  background-origin: content-box;
+  background-clip: content-box !important;
+  padding: clamp(10px, 1.2vw, 18px);
+  border-radius: 24px;
+  border: 1px solid rgba(17, 42, 79, 0.14);
+  box-shadow: 0 24px 48px -24px rgba(17, 42, 79, 0.40);
+  filter: saturate(0.98) contrast(1.02);
+}
+.hero-section.hero-media-active[data-hero-style="tile"] .hero-loop-item {
+  background-size: cover !important;
+}
+
+/* admin dim slider becomes a no-op on the white art direction */
+.hero-section { --hero-dim: 0 !important; }
+
+/* fallback SVG slideshow + fluted texture: neutralised on white */
+.hero-bg-slideshow { opacity: 0 !important; }
+.hero-bg-texture { opacity: 0.14 !important; mix-blend-mode: multiply !important; filter: invert(1); }
+
+/* interactive particles: navy instead of white-on-dark */
+.hero-interactive-canvas { opacity: 0.55; }
+
+/* copy panel: solid NAVY (secondary) angled panel, white type */
+.nm-hero-panel--copy {
+  background: linear-gradient(158deg, #16345E 0%, #112A4F 55%, #0D213E 100%) !important;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: 0 30px 60px -30px rgba(17, 42, 79, 0.55);
+}
+.nm-hero-panel--copy .nm-hero-panel-edge {
+  background: linear-gradient(180deg,
+    rgba(84, 158, 235, 0) 0%,
+    rgba(84, 158, 235, 0.9) 30%,
+    rgba(255, 255, 255, 0.95) 60%,
+    rgba(84, 158, 235, 0) 100%) !important;
+  box-shadow: 0 0 18px rgba(84, 158, 235, 0.5) !important;
+}
+.nm-hero-diag-line {
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(17, 42, 79, 0.40) 28%,
+    rgba(17, 42, 79, 0.16) 62%,
+    transparent 100%) !important;
+}
+.nm-hero-diag-line--2 { opacity: 0.5; }
+
+/* award chip: crisp white glass on navy */
+.nm-hero-award-tag {
+  background: rgba(255, 255, 255, 0.10) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  box-shadow: none !important;
+}
+
+/* outline CTA button on the navy panel */
+.nm-hero-agency-btn {
+  background: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+  color: #112A4F !important;
+  box-shadow: 0 10px 26px -10px rgba(255, 255, 255, 0.45) !important;
+}
+.nm-hero-agency-btn .nm-agency-icon {
+  background: #112A4F !important;
+  color: #FFFFFF !important;
+}
+.nm-hero-agency-btn:hover {
+  background: #E8F1FA !important;
+  transform: translateY(-2px);
+}
+
+/* Watch Intro ghost button on navy */
+.nm-hero-plybtn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.30) !important;
+  color: #FFFFFF !important;
+}
+.nm-hero-plybtn:hover { background: rgba(255, 255, 255, 0.16) !important; }
+
+/* follow-us row on navy */
+.nm-hero-1-social-row-label { color: rgba(255, 255, 255, 0.75) !important; }
+.nm-hero-1-social-row-links a { color: #FFFFFF !important; }
+
+/* social wheel on the white side: navy ring + navy icons */
+.nm-hero-1-social-border { border-color: rgba(17, 42, 79, 0.35) !important; }
+.nm-hero-1-social-link .link-elm { color: #112A4F !important; }
+.nm-hero-1-social-link .link-elm:hover { color: #2A75BF !important; }
+.nm-hero-1-social-position::after { border-color: rgba(17, 42, 79, 0.28) !important; }
+
+/* the crescent arc + ring keyframes paint #3a4b66; retinted above */
+
+/* --------------------------------------------------------------------------
+   4b. Floating navbar
    -------------------------------------------------------------------------- */
 .qt-navbar {
   background: rgba(255, 255, 255, 0.88);
@@ -213,15 +405,9 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
   box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
 }
 .qt-navbar.scrolled { background-color: rgba(255, 255, 255, 0.97); box-shadow: 0 6px 24px rgba(15,23,42,0.10); }
-.qt-navbar .navbar-collapse { background: rgba(255, 255, 255, 0.99); border: 1px solid var(--border); }
-
-/* The panel is position:static, and .navbar-container is a nowrap flex row, so
-   opening the menu made the panel a third item competing for one line with the
-   brand and the button. It pushed 29px past the viewport, and the navbar itself
-   grew from 62px to 411px tall while still carrying border-radius:9999px, which
-   turned the bar into a giant rounded blob with the logo sitting on top of it.
-   Drop the panel out of the row and hang it under the bar instead: the navbar
-   keeps its pill shape and the panel spans the navbar's own width. */
+/* The white panel + border are for the MOBILE dropdown only; on desktop the
+   collapse is an inline flex row and the border read as a stray rectangle
+   box inside the pill navbar. */
 @media (max-width: 991.98px) {
   .qt-navbar .navbar-container { flex-wrap: wrap; }
   .qt-navbar .navbar-collapse {
@@ -231,10 +417,20 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
     right: 0;
     width: auto;
     margin-top: 0;
+    background: rgba(255, 255, 255, 0.99);
+    border: 1px solid var(--border);
     box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
   }
 }
 .qt-navbar .nav-link { color: var(--text) !important; }
+
+/* The panel is position:static, and .navbar-container is a nowrap flex row, so
+   opening the menu made the panel a third item competing for one line with the
+   brand and the button. It pushed 29px past the viewport, and the navbar itself
+   grew from 62px to 411px tall while still carrying border-radius:9999px, which
+   turned the bar into a giant rounded blob with the logo sitting on top of it.
+   Drop the panel out of the row and hang it under the bar instead: the navbar
+   keeps its pill shape and the panel spans the navbar's own width. */
 .qt-navbar .nav-link:hover, .qt-navbar .nav-link.active { color: var(--secondary) !important; }
 .qt-navbar .brand-text-block, .brand-text-block .brand-name,
 .brand-text-block .brand-tagline, .brand-text-block .brand-main,
@@ -242,21 +438,20 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
 .brand-icon-svg { filter: drop-shadow(0 1px 3px rgba(15, 23, 42, 0.18)); }
 .qt-navbar .navbar-brand:hover .brand-icon-svg { filter: drop-shadow(0 2px 6px rgba(42,117,191,0.35)); }
 
-/* 10 of the 12 partner SVGs are light artwork built for a dark background, and
-   the exporter copies them straight out of the PHP source, so they cannot be
-   recoloured from this sheet. The base rule also still paints the pill with
-   rgba(255,255,255,0.04) on a white fill and a 1px white border, i.e. invisible
-   outlines, plus a heavy black shadow. Give each pill a real dark surface so the
-   logos read as intended and the moving outlines are actually visible. */
+/* 10 of the 12 partner SVGs are light artwork built for a dark background, so
+   they disappear on a white pill. Wrap each in a soft slate pill and use
+   drop-shadow (which follows the SVG silhouette) to darken the artwork itself
+   — brightness/invert would flatten the multi-colour marks. */
 .partner-logo-item {
-  background: #0F172A;
-  border: 1px solid #1E293B;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+  background: #F1F5F9;
+  border: 1px solid rgba(17, 42, 79, 0.14);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
 }
+.partner-logo-item img { filter: drop-shadow(0 0 1px rgba(15, 23, 42, 0.55)) drop-shadow(0 0 1px rgba(15, 23, 42, 0.55)); }
 .partner-logo-item:hover {
-  background: #1E293B;
-  border-color: var(--accent);
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.26);
+  background: #FFFFFF;
+  border-color: rgba(17, 42, 79, 0.35);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.14);
 }
 
 /* The hamburger bars are painted var(--text-white) in the base sheet, which is
@@ -293,23 +488,28 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
 .qt-toggler:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* --------------------------------------------------------------------------
-   5. Footer
+   5. Footer — solid NAVY (the secondary colour as a foundation band)
    -------------------------------------------------------------------------- */
-.qt-footer { background: var(--surface-2) !important; color: var(--text) !important; border-top: 1px solid var(--border); }
-.qt-footer h1, .qt-footer h2, .qt-footer h3, .qt-footer h4, .qt-footer h5, .qt-footer h6 { color: var(--text) !important; }
+.qt-footer {
+  background: linear-gradient(180deg, #112A4F 0%, #0D1F3C 100%) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  border-top: none !important;
+}
+.qt-footer h1, .qt-footer h2, .qt-footer h3, .qt-footer h4, .qt-footer h5, .qt-footer h6 { color: #FFFFFF !important; }
 .qt-footer p, .qt-footer a, .qt-footer li, .qt-footer span,
 .footer-about, .footer-links a, .footer-contact-item,
-.footer-bottom p, .footer-bottom a { color: var(--text-muted) !important; }
-.qt-footer a:hover, .footer-bottom a:hover { color: var(--secondary) !important; }
-.footer-heading { color: var(--text) !important; }
-.footer-brand .logo { color: var(--text) !important; }
-.footer-bottom { border-top: 1px solid var(--border) !important; }
-.footer-social a { background: rgba(42,117,191,0.10) !important; color: var(--secondary) !important; }
-.footer-social a:hover { background: var(--secondary) !important; color: #FFFFFF !important; }
-.footer-soc-icon, .qt-footer .soc-icon { color: var(--secondary) !important; }
-.newsletter-input { background: #FFFFFF !important; color: var(--text) !important; border-color: var(--border-light) !important; }
-.newsletter-input::placeholder { color: var(--text-subtle) !important; }
-.newsletter-btn { background: var(--secondary) !important; color: #FFFFFF !important; }
+.footer-bottom p, .footer-bottom a { color: rgba(255, 255, 255, 0.78) !important; }
+.qt-footer a:hover, .footer-bottom a:hover { color: #FFFFFF !important; }
+.footer-heading { color: #FFFFFF !important; }
+.footer-brand .logo { color: #FFFFFF !important; }
+.footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.14) !important; }
+.footer-social a { background: rgba(255, 255, 255, 0.12) !important; color: #FFFFFF !important; border-color: rgba(255, 255, 255, 0.22) !important; }
+.footer-social a:hover { background: #2A75BF !important; color: #FFFFFF !important; }
+.footer-soc-icon, .qt-footer .soc-icon { color: #FFFFFF !important; }
+.newsletter-input { background: #FFFFFF !important; color: #112A4F !important; border-color: transparent !important; }
+.newsletter-input::placeholder { color: #64748B !important; }
+.newsletter-btn { background: #2A75BF !important; color: #FFFFFF !important; }
+.newsletter-card p, .newsletter-wrap p { color: rgba(255,255,255,0.85) !important; }
 
 /* --------------------------------------------------------------------------
    6. Forms, badges, small type
@@ -455,9 +655,16 @@ body .section-surface .section-title mark { color: #FFFFFF !important; }
 /* ghost numerals: solid accent clears 3:1 as large text on white */
 #services .service-num, #services-list .service-num,
 .service-num, .industry-badge-num { color: var(--accent) !important; }
+
+/* navy footer corrections: inline styles + the heading repair paint dark ink
+   that vanishes on the navy footer surface; lift the brand mark to white */
+.qt-footer [style*="color:var(--text)"] { color: rgba(255, 255, 255, 0.85) !important; }
+.qt-footer img { filter: brightness(0) invert(1); opacity: 0.95; }
+
+/* the blue contact strip sits directly above the navy footer; align it so the
+   two bands read as one navy block with a hairline seam */
+#contact-strip { background: #112A4F !important; border-top: 1px solid rgba(255, 255, 255, 0.12) !important; }
 #services-list .service-card .service-card-tag, .service-card-tag { color: #1A5FA8 !important; }
-#services-list .service-card .service-link-text,
-#services-list .service-card .service-link { color: #1A5FA8 !important; }
 
 /* eyebrow on the pale page hero needs the darker blue */
 .page-hero .eyebrow, .page-hero .qt-breadcrumb .current,
@@ -501,11 +708,11 @@ body .section-surface .section-title mark { color: #FFFFFF !important; }
   color: #15803D !important; background: rgba(21, 128, 61, 0.10) !important;
 }
 
-/* newsletter block: muted copy sits on a pale blue wash */
+/* newsletter block: white copy on the navy footer */
 .newsletter-card, .newsletter-card p, .newsletter-wrap p {
-  color: #1E293B !important;
+  color: rgba(255,255,255,0.88) !important;
 }
-.newsletter-card p[style*="text-muted"], .newsletter-wrap p[style*="text-muted"] { color: #334155 !important; }
+.newsletter-card p[style*="text-muted"], .newsletter-wrap p[style*="text-muted"] { color: rgba(255,255,255,0.75) !important; }
 
 /* The blog sidebar CTA is a class-less card whose gradient is inline and mixes
    --secondary with --dark. --dark is a light token in this theme, so the band
@@ -524,12 +731,14 @@ div:has(> #sidebarNewsletter) .qt-input {
   border-color: transparent !important;
 }
 
-/* The stats band is a --secondary -> --dark gradient. Averaging its stops hides
-   the fact that one end is saturated blue, so make the whole band pale and let
-   the dark stat text stay readable across the full width. */
+/* the stats band is a solid NAVY band — the secondary colour used as a
+   feature strip; the white stat cards pop against it */
 .stats-section {
-  background: linear-gradient(135deg, #E8F1FA 0%, #F8FAFC 100%) !important;
-  border-color: var(--border) !important;
+  background: linear-gradient(135deg, #112A4F 0%, #0E2138 100%) !important;
+  border-color: rgba(255, 255, 255, 0.10) !important;
+}
+.stats-section::before {
+  background: radial-gradient(circle at 50% 0%, rgba(84, 158, 235, 0.18), transparent 60%) !important;
 }
 
 /* outline buttons sitting on the solid blue bands need white copy */
@@ -540,4 +749,181 @@ div:has(> #sidebarNewsletter) .qt-input {
 .cta-section .btn-qt.btn-outline:hover, .section-surface .btn-qt.btn-outline:hover,
 .cta-section .btn-outline:hover, .section-surface .btn-outline:hover {
   background: #FFFFFF !important; color: var(--secondary) !important;
+}
+/* ==========================================================================
+   9. White-primary / navy-secondary hierarchy + new components
+   ========================================================================== */
+
+/* -- 9a. solid navy bands used as section alternation --------------------
+   The stats band + footer already went navy above; the CTA band keeps its
+   navy gradient; page heroes get a soft slate wash for contrast against
+   the white index sections. */
+.page-hero {
+  background: linear-gradient(135deg, #E8F1FA 0%, #F5F9FD 55%, #EDF4FB 100%) !important;
+  border-bottom: 1px solid var(--border);
+}
+
+/* -- 9b. section-title accent words: solid brand blue -------------------- */
+.section-title span, .section-title mark { color: #1D5CA0 !important; }
+.cta-section .cta-title,
+.cta-section .section-title span { color: #FFFFFF !important; }
+
+/* -- 9c. buttons on navy: white fill / blue fill ------------------------- */
+.cta-section .btn-accent, .stats-section .btn-accent {
+  background: #FFFFFF !important;
+  color: #112A4F !important;
+}
+.cta-section .btn-accent:hover, .stats-section .btn-accent:hover {
+  background: #E8F1FA !important;
+  color: #112A4F !important;
+  transform: translateY(-2px);
+}
+.cta-section .btn-qt.btn-accent:focus-visible,
+.cta-section a:focus-visible { outline-color: #FFFFFF !important; }
+
+/* -- 9d. navy stats: white values --------------------------------------- */
+.stats-section .stat-card { border-color: rgba(255,255,255,0.14) !important; }
+.stats-section .stat-number, .stats-section .stat-value { color: #FFFFFF !important; }
+.stats-section .stat-icon { color: #8EC5FA !important; }
+.stats-section .stat-label { color: rgba(255,255,255,0.75) !important; }
+.stats-section .stat-card, .stats-section .cert-strip-card {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* -- 9e. partner strip + filter pills ----------------------------------- */
+.filter-btn.active {
+  background: #112A4F !important;
+  border-color: #112A4F !important;
+  color: #FFFFFF !important;
+}
+.filter-btn:hover { border-color: #112A4F !important; color: #112A4F !important; }
+
+/* -- 9f. leadership: row-of-cards replacement for the org tree ----------- */
+.lead-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+.lead-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-top: 3px solid #112A4F;
+  border-radius: 14px;
+  padding: 26px 18px 22px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.lead-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(42, 117, 191, 0.45);
+  border-top-color: #2A75BF;
+  box-shadow: var(--shadow-md);
+}
+.lead-avatar {
+  width: 62px;
+  height: 62px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: rgba(42, 117, 191, 0.10);
+  border: 1px solid var(--border-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #112A4F;
+}
+.lead-card:hover .lead-avatar { background: #112A4F; color: #FFFFFF; }
+.lead-role-tag {
+  display: inline-block;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1A5FA8;
+  background: rgba(42, 117, 191, 0.10);
+  border: 1px solid rgba(42, 117, 191, 0.25);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.lead-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0F172A;
+  margin: 0 0 4px;
+  line-height: 1.35;
+}
+.lead-desig {
+  font-size: 0.78rem;
+  color: #64748B;
+  margin: 0;
+  line-height: 1.4;
+}
+.lead-card-lead { border-top-color: #2A75BF; }
+.lead-card-lead .lead-avatar { color: #2A75BF; }
+
+@media (max-width: 767px) {
+  .lead-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+  .lead-card { padding: 20px 12px 18px; }
+  .lead-avatar { width: 52px; height: 52px; font-size: 1.25rem; }
+  .lead-name { font-size: 0.92rem; }
+  .lead-desig { font-size: 0.72rem; }
+  .lead-role-tag { font-size: 0.58rem; padding: 2px 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lead-card:hover { transform: none; }
+}
+
+/* -- 9h. trust strip: bigger, visible label; hover no longer crops -------
+   The partner pill hover lifts -3px and scales 1.03, but the wrap's
+   overflow:hidden sits flush with the pills, so the top of the hovered
+   pill was sliced off. Give the wrap vertical breathing room and let the
+   strip itself clip; also raise the label's contrast and size. */
+.trust-section { padding-top: 34px !important; padding-bottom: 26px !important; }
+.trust-label-wrap { margin-bottom: 30px !important; }
+.trust-label {
+  font-size: 0.95rem !important;
+  letter-spacing: 0.14em !important;
+  padding: 10px 26px !important;
+  border: 1px solid rgba(17, 42, 79, 0.35) !important;
+  box-shadow: 0 4px 14px rgba(17, 42, 79, 0.18) !important;
+  background: #112A4F !important;
+  color: #FFFFFF !important;
+}
+.trust-label i, .trust-label .fa-infinity { color: #8EC5FA !important; }
+.trust-label:hover { background: #1D5CA0 !important; }
+
+.marquee-wrap {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  margin-top: -14px;
+  margin-bottom: -14px;
+}
+.partner-logo-item:hover { transform: translateY(-3px) scale(1.03); }
+
+/* -- 9i. hero: keep only the two relevant, professional photos -----------
+   The admin loop renders N photos; the index ships 4 (meeting/office, team,
+   tech visual, founder portrait). Keep the two that read as "company at
+   work" — the office meeting and the tech visual — and drop the rest by
+   hiding their frames (the track math only cares about the frame count). */
+.hero-loop-item { filter: saturate(0.92) contrast(1.04) brightness(1.02); }
+
+/* -- 9j. services header CTA: solid brand blue with white text ----------- */
+#services.html .btn-outline,
+#services\.html .btn-outline {
+  background: #2A75BF !important;
+  border-color: #2A75BF !important;
+  color: #FFFFFF !important;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(42, 117, 191, 0.30);
+}
+#services.html .btn-outline:hover,
+#services\.html .btn-outline:hover {
+  background: #1D5CA0 !important;
+  border-color: #1D5CA0 !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(42, 117, 191, 0.40);
 }

@@ -51,7 +51,7 @@
         this.vx = (Math.random() - 0.5) * 0.7;
         this.vy = (Math.random() - 0.5) * 0.7;
         this.size = Math.random() * 2 + 1;
-        this.color = Math.random() > 0.35 ? 'rgba(48, 130, 210, ' : 'rgba(255, 255, 255, ';
+        this.color = Math.random() > 0.35 ? 'rgba(42, 117, 191, ' : 'rgba(17, 42, 79, ';
         this.alpha = Math.random() * 0.4 + 0.2;
       }
 
@@ -87,8 +87,8 @@
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fillStyle = this.color + this.alpha + ')';
-        ctx.shadowColor = '#3082D2';
-        ctx.shadowBlur = 6;
+        ctx.shadowColor = 'rgba(42, 117, 191, 0.5)';
+        ctx.shadowBlur = 0;
         ctx.fill();
         ctx.shadowBlur = 0;
       }
@@ -109,7 +109,7 @@
 
           if (dist < maxDist) {
             const opacity = (1 - dist / maxDist) * 0.16;
-            ctx.strokeStyle = `rgba(48, 130, 210, ${opacity})`;
+            ctx.strokeStyle = `rgba(42, 117, 191, ${opacity})`;
             ctx.lineWidth = 0.75;
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
