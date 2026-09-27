@@ -4699,3 +4699,156 @@ img { max-width: 100%; height: auto; }
   .nm-hero-1-social-row-links a { font-size: 16px; }
 }
 
+/* ============================================================
+   PROCESS - service delivery timeline
+   ------------------------------------------------------------
+   Two-column band: a display "Process." headline plus the
+   service-specific intro on the left (~45%), and a 4-step
+   vertical timeline on the right. Every value is derived from an
+   existing token, so the block themes itself - the light overlay
+   swaps the tokens, not this CSS.
+
+   Markup contract:
+     section.qt-process-section > .container > .qt-process-grid
+       .qt-process-intro  > h2.qt-process-title + p.qt-process-lede
+       ol.qt-process-steps > li.qt-process-step
+                               span.qt-process-dot
+                               h3.qt-process-step-title
+                               p.qt-process-step-desc
+
+   Steps are authored per service; the visual is identical
+   everywhere, so only the copy inside .qt-process-steps changes.
+   ============================================================ */
+.qt-process-section {
+  /* Single place to retune the whole timeline. */
+  --qt-p-dot: 14px;          /* marker diameter + rail centring unit */
+  --qt-p-dot-top: 0.3rem;    /* marker offset from the step's top edge */
+  --qt-p-indent: 34px;       /* text inset, clears the rail */
+  --qt-p-step-gap: 2.4rem;   /* vertical rhythm between steps */
+  --qt-p-rail: 2px;
+
+  background: var(--primary);
+  border-top: 1px solid var(--border);
+}
+
+.qt-process-grid {
+  display: grid;
+  /* 45/55 rather than Bootstrap twelfths - the spec asks for ~45%. */
+  grid-template-columns: 45fr 55fr;
+  column-gap: 3.5rem;
+  align-items: start;
+}
+
+/* --- left column: headline + intro ----------------------------- */
+.qt-process-title {
+  font-size: clamp(2.1rem, 1.2rem + 3.2vw, 3.3rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0 0 1.25rem;
+}
+/* Only the full stop takes the accent, so the word still reads as one
+   token while the dot echoes the timeline running beside it. */
+.qt-process-title .qt-process-period { color: var(--accent); }
+
+.qt-process-lede {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  line-height: 1.85;
+  max-width: 30rem;
+  margin: 0;
+}
+
+/* --- right column: the timeline --------------------------------- */
+.qt-process-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.qt-process-step {
+  position: relative;
+  padding: 0 0 var(--qt-p-step-gap) var(--qt-p-indent);
+}
+.qt-process-step:last-child { padding-bottom: 0; }
+
+/* One rail segment per step: it leaves this dot's centre and reaches
+   into the next step, ending on the next dot's top edge so the four
+   segments read as a single continuous stroke. */
+.qt-process-step::before {
+  content: '';
+  position: absolute;
+  left: calc((var(--qt-p-dot) - var(--qt-p-rail)) / 2);
+  width: var(--qt-p-rail);
+  top: calc(var(--qt-p-dot-top) + var(--qt-p-dot) / 2);
+  bottom: calc(-1 * var(--qt-p-dot-top));
+  background: var(--accent);
+  border-radius: var(--qt-p-rail);
+}
+.qt-process-step:last-child::before { content: none; }
+
+.qt-process-dot {
+  position: absolute;
+  left: 0;
+  top: var(--qt-p-dot-top);
+  width: var(--qt-p-dot);
+  height: var(--qt-p-dot);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+/* The closing step is the hand-off rather than work in flight, so it is
+   hollowed out - that is what makes the timeline read as finished. */
+.qt-process-step:last-child .qt-process-dot {
+  background: var(--surface-2);
+  border: 1px solid var(--border-light);
+  box-shadow: none;
+}
+
+.qt-process-step-title {
+  font-size: 1.06rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--text);
+  margin: 0 0 0.45rem;
+}
+
+.qt-process-step-desc {
+  color: var(--text-muted);
+  font-size: 0.93rem;
+  font-weight: 400;
+  line-height: 1.75;
+  max-width: 34rem;
+  margin: 0;
+}
+
+/* --- responsive -------------------------------------------------- */
+/* Tablet: hold the two columns, pull the gutter and rhythm in. */
+@media (max-width: 991px) {
+  .qt-process-section { --qt-p-step-gap: 2rem; --qt-p-indent: 30px; }
+  .qt-process-grid { column-gap: 2.25rem; }
+  .qt-process-lede { font-size: 0.94rem; }
+  .qt-process-step-title { font-size: 1rem; }
+  .qt-process-step-desc { font-size: 0.9rem; }
+}
+
+/* Mobile: stack the intro above the timeline. The steps keep their
+   rail and indent, so the dots stay in a single column. */
+@media (max-width: 767px) {
+  .qt-process-section { --qt-p-step-gap: 1.9rem; }
+  .qt-process-grid {
+    grid-template-columns: 1fr;
+    row-gap: 2.5rem;
+  }
+  .qt-process-lede { max-width: none; }
+}
+
+@media (max-width: 575px) {
+  .qt-process-section { --qt-p-dot: 12px; --qt-p-indent: 26px; }
+  .qt-process-title { margin-bottom: 1rem; }
+  .qt-process-step-desc { max-width: none; }
+}
+
