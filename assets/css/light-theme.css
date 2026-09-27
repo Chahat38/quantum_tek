@@ -214,6 +214,26 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
 }
 .qt-navbar.scrolled { background-color: rgba(255, 255, 255, 0.97); box-shadow: 0 6px 24px rgba(15,23,42,0.10); }
 .qt-navbar .navbar-collapse { background: rgba(255, 255, 255, 0.99); border: 1px solid var(--border); }
+
+/* The panel is position:static, and .navbar-container is a nowrap flex row, so
+   opening the menu made the panel a third item competing for one line with the
+   brand and the button. It pushed 29px past the viewport, and the navbar itself
+   grew from 62px to 411px tall while still carrying border-radius:9999px, which
+   turned the bar into a giant rounded blob with the logo sitting on top of it.
+   Drop the panel out of the row and hang it under the bar instead: the navbar
+   keeps its pill shape and the panel spans the navbar's own width. */
+@media (max-width: 991.98px) {
+  .qt-navbar .navbar-container { flex-wrap: wrap; }
+  .qt-navbar .navbar-collapse {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    width: auto;
+    margin-top: 0;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+  }
+}
 .qt-navbar .nav-link { color: var(--text) !important; }
 .qt-navbar .nav-link:hover, .qt-navbar .nav-link.active { color: var(--secondary) !important; }
 .qt-navbar .brand-text-block, .brand-text-block .brand-name,
@@ -221,6 +241,23 @@ h1, h2, h3, h4, h5, h6 { color: var(--text); }
 .brand-text-block .brand-sub { color: var(--text) !important; }
 .brand-icon-svg { filter: drop-shadow(0 1px 3px rgba(15, 23, 42, 0.18)); }
 .qt-navbar .navbar-brand:hover .brand-icon-svg { filter: drop-shadow(0 2px 6px rgba(42,117,191,0.35)); }
+
+/* 10 of the 12 partner SVGs are light artwork built for a dark background, and
+   the exporter copies them straight out of the PHP source, so they cannot be
+   recoloured from this sheet. The base rule also still paints the pill with
+   rgba(255,255,255,0.04) on a white fill and a 1px white border, i.e. invisible
+   outlines, plus a heavy black shadow. Give each pill a real dark surface so the
+   logos read as intended and the moving outlines are actually visible. */
+.partner-logo-item {
+  background: #0F172A;
+  border: 1px solid #1E293B;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+}
+.partner-logo-item:hover {
+  background: #1E293B;
+  border-color: var(--accent);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.26);
+}
 
 /* The hamburger bars are painted var(--text-white) in the base sheet, which is
    invisible on this now-white navbar. The control gets no permanent fill so it
