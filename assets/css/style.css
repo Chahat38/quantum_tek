@@ -4877,3 +4877,92 @@ img { max-width: 100%; height: auto; }
   .qt-process-step-desc { max-width: none; }
 }
 
+
+/* ============================================================
+   NAVTTC COURSES AT KUST (training service page)
+   Three course cards, each opening a Bootstrap modal with the
+   case study. Colours come from tokens so the light theme
+   repaints the whole block without extra overrides.
+   ============================================================ */
+.qt-course-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+.qt-course-card:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -18px rgba(42, 117, 191, 0.45);
+}
+.qt-course-icon {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  background: var(--accent-glow);
+  border: 1px solid var(--border-accent);
+  color: var(--accent);
+  font-size: 1.5rem;
+  margin-bottom: 18px;
+}
+.qt-course-title {
+  font-size: 1.12rem;
+  margin-bottom: 10px;
+}
+.qt-course-desc {
+  font-size: 0.88rem;
+  line-height: 1.78;
+  color: var(--text-muted);
+  margin-bottom: 22px;
+}
+.qt-course-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-glow);
+  border: 1px solid var(--border-accent);
+  border-radius: 999px;
+  padding: 5px 12px;
+  margin-bottom: 16px;
+}
+.qt-course-cta { margin-top: auto; justify-content: center; width: 100%; }
+
+/* case-study modal */
+.qt-cs-section { margin-bottom: 20px; }
+.qt-cs-section:last-child { margin-bottom: 0; }
+.qt-cs-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.qt-cs-text {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin: 0;
+}
+.qt-cs-list {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
